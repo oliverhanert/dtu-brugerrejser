@@ -52,11 +52,12 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
   width:58px; height:58px; border-radius:50%; border:1.5px solid var(--line);
   background:var(--card); flex-shrink:0; position:relative; overflow:hidden;
 }
-.avatar::before{
+.avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+.avatar:empty::before{
   content:""; position:absolute; left:50%; top:13px; width:20px; height:20px;
   margin-left:-10px; border-radius:50%; background:var(--line-soft);
 }
-.avatar::after{
+.avatar:empty::after{
   content:""; position:absolute; left:50%; top:36px; width:40px; height:30px;
   margin-left:-20px; border-radius:50%; background:var(--line-soft);
 }
@@ -374,7 +375,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
     <h1>Fra "det kunne være noget" til første modul</h1>
   </div>
   <div class="persona">
-    <div class="avatar"></div>
+    <div class="avatar"><img src="./mockup-assets/hans-avatar.png" alt="Hans"></div>
     <div>
       <h3>Hans, fagekspert på vej mod sin første lederstilling</h3>
       <p>Har aftalt med chefen at blive leder. En ven og chefen har begge taget en diplom i ledelse. Ved ikke, hvor han skal starte.</p>
@@ -868,42 +869,43 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     variants: [
       { label: "E-mail", url: "mail · fra: DTU Learn for Life", html: `
         <div class="m-avatarrow">
-          <div class="dot-lg" style="width:22px;height:22px;"></div>
-          <div class="who"><b>Klar til at tage med til din leder</b><span>Vedhæftet: ét ark, til print eller videresendelse</span></div>
+          <div class="dot-lg" style="width:22px;height:22px; background:#fff; display:flex; align-items:center; justify-content:center;"><img src="./mockup-assets/dtu-logo.png" alt="DTU logo" style="width:70%; height:auto;"></div>
+          <div class="who"><b>DTU Learn for Life</b><span>Til: Hans · Materiale til din leder</span></div>
         </div>
-        <div class="m-copy">Vedhæftet er et ét-siders ark, du kan give din leder — og en business case, hvis I skal have en formel godkendelse.</div>
+        <div class="m-copy">Hej Hans<br><br>Herunder er to vedhæftninger, du kan bruge, når du skal have et ja fra din leder til modulet Fra specialist til leder:</div>
         <div class="m-hr"></div>
-        <div class="m-title" style="font-size:0.85rem;">Fra specialist til leder — start 3. november</div>
-        <div class="m-factbox">
-          <div><b>Pris</b>11.800 kr. (ca. 6.900 kr. efter SVU)</div>
-          <div><b>Format</b>3 dage i Lyngby + 3 dage online</div>
-          <div><b>Binding</b>Ingen — kun dette modul</div>
-        </div>
-        <div class="m-faq-q">Hvordan tager jeg det med til min leder?</div>
-        <div class="m-sub">Send arket direkte, eller print det til et møde. Vil de have det uddybet, er business casen vedhæftet samme mail.</div>
-        <div class="m-btn outline">📎 Fra_specialist_til_leder_ark.pdf</div>
-        <div class="m-btn outline">📎 Business_case_leder_modul.pdf</div>
+        <div class="m-title" style="font-size:0.85rem;">Til at forwarde eller printe</div>
+        <div class="m-sub">Et beslutningsoplæg skrevet direkte til din leder, med pris, format og hvad han eller hun skal beslutte.</div>
+        <div class="m-btn outline">Fra_specialist_til_leder_beslutningsoplaeg.pdf</div>
+        <div class="m-hr"></div>
+        <div class="m-title" style="font-size:0.85rem;">Hvis der skal en formel godkendelse til</div>
+        <div class="m-sub">En kort business case til HR eller budgetmøde.</div>
+        <div class="m-btn outline">Business_case_leder_modul.pdf</div>
+        <div class="m-hr"></div>
+        <div class="m-copy">Har du eller din leder spørgsmål, før I beslutter, kan I også booke et kort opkald med en studievejleder.</div>
+        <div class="m-btn">Book 15 min. med Peter Holm</div>
+        <div class="m-cite" style="margin-top:14px;">Med venlig hilsen<br>DTU Learn for Life</div>
       `},
-      { label: "Vedhæftning: ét ark", url: "PDF · Fra_specialist_til_leder_ark.pdf", html: `
+      { label: "Vedhæftning: beslutningsoplæg", url: "PDF · Fra_specialist_til_leder_beslutningsoplaeg.pdf", html: `
         <div class="doc-page">
           <img class="doc-logo" src="./mockup-assets/dtu-logo.png" alt="DTU logo">
-          <div class="doc-kicker">DTU Learn for Life · Diplommodul</div>
+          <div class="doc-kicker">Beslutningsoplæg til nærmeste leder</div>
           <div class="doc-title">Fra specialist til leder</div>
-          <div class="doc-sub">Til dig, der skal give et hurtigt ja eller nej. Ét modul, ikke en tilmelding til hele diplomuddannelsen.</div>
+          <div class="doc-sub">Din medarbejder skal snart lede tidligere kolleger og ønsker at tage dette modul. Nedenfor er det relevante for at kunne godkende det.</div>
           <div class="doc-factgrid">
             <div><b>Pris</b><span>11.800 kr.</span></div>
             <div><b>Næste start</b><span>3. november 2026</span></div>
             <div><b>Format</b><span>3 dage i Lyngby + 3 dage online</span></div>
             <div><b>Finansiering</b><span>SVU, ca. 4.900 kr. i støtte</span></div>
           </div>
-          <div class="doc-h">Hvorfor lige nu</div>
-          <div class="doc-p">Han er stærk fagligt, men skal snart lede tidligere kolleger. Modulet giver konkrete redskaber til det — ikke teori, han allerede kender.</div>
-          <div class="doc-h">Hvad han kan bagefter</div>
-          <div class="doc-p">Sætte retning for et team, holde en svær samtale med en tidligere sidemand, og uddelegere uden at miste overblikket. Afgangsopgaven er en plan for hans eget team.</div>
-          <div class="doc-h">Hvis I vil mere</div>
-          <div class="doc-p">Modulet er også modul 1 i den fulde diplomuddannelse i ledelse. I beslutter først om resten, når I har set, hvad han bringer med tilbage.</div>
+          <div class="doc-h">Udbytte</div>
+          <div class="doc-p">Deltageren opnår redskaber til at sætte retning for et team, håndtere svære samtaler med tidligere sidestillede kolleger og uddelegere ansvar. Afgangsopgaven er en konkret plan for eget team, som kan efterspørges.</div>
+          <div class="doc-h">Forpligtelse</div>
+          <div class="doc-p">Modulet kan tages alene og indebærer ingen binding til den øvrige diplomuddannelse. Det udgør samtidig modul 1, hvis en videre uddannelse ønskes på et senere tidspunkt.</div>
           <div class="doc-quote">"Vi sagde ja til ét modul for at se, om det gav noget. Tre måneder efter tilmeldte vi ham resten."<br>— Mette Aabo, afdelingschef, tidligere deltager</div>
-          <div class="doc-footer"><span>Kontakt: Peter Holm, studievejleder · 45 25 XX XX</span><span>lifelonglearning.dtu.dk</span></div>
+          <div class="doc-h">Spørgsmål før beslutning</div>
+          <div class="doc-p">Kontakt studievejleder Peter Holm, eller book 15 minutter — gerne med deltagelse af medarbejderen.</div>
+          <div class="doc-footer"><span>Peter Holm, studievejleder · 45 25 XX XX</span><span>lifelonglearning.dtu.dk</span></div>
         </div>
       `},
       { label: "Vedhæftning: business case", url: "PDF · Business_case_leder_modul.pdf", html: `
@@ -911,22 +913,24 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
           <img class="doc-logo" src="./mockup-assets/dtu-logo.png" alt="DTU logo">
           <div class="doc-kicker">DTU Learn for Life · Til godkendelse hos leder eller HR</div>
           <div class="doc-title">Business case: Fra specialist til leder</div>
-          <div class="doc-sub">Brug dette ark, hvis kompetenceudvikling skal godkendes formelt, fx over en beløbsgrænse eller i et budgetmøde.</div>
-          <div class="doc-h">1. Problemet</div>
-          <div class="doc-p">Han overtager snart ledelsen af tidligere kolleger. Det kræver andre redskaber end de faglige — retning, delegering og svære samtaler — som han ikke har fået endnu.</div>
-          <div class="doc-h">2. Forslaget</div>
-          <div class="doc-p">Ét afgrænset diplommodul (5 ECTS) hos DTU, ikke en tilmelding til hele uddannelsen. I kan stoppe efter modulet uden binding.</div>
-          <div class="doc-h">3. Pris og tid</div>
-          <div class="doc-p">11.800 kr. minus op til ca. 4.900 kr. i SVU-støtte. 3 dage i Lyngby + 3 dage online, plus ca. 2 dages forberedelse hjemmefra. Næste hold starter 3. november 2026.</div>
-          <div class="doc-h">4. Hvad I får igen</div>
-          <div class="doc-p">En afgangsopgave, der er en konkret plan for hans eget team — ikke en generel eksamen. I kan bede om at se den.</div>
+          <div class="doc-sub">Brug dette oplæg, hvis kompetenceudvikling skal godkendes formelt, fx over en beløbsgrænse eller i et budgetmøde.</div>
+          <div class="doc-h">1. Behov</div>
+          <div class="doc-p">Medarbejderen overtager snart ledelsen af tidligere kolleger og efterspørger redskaber til det: at sætte retning, uddelegere ansvar og håndtere de svære samtaler, som fagligheden alene ikke ruster til.</div>
+          <div class="doc-h">2. Løsning</div>
+          <div class="doc-p">Ét afgrænset diplommodul (5 ECTS) hos DTU, uafhængigt af den fulde diplomuddannelse. Der er ingen binding til yderligere moduler.</div>
+          <div class="doc-h">3. Pris og tidsforbrug</div>
+          <div class="doc-p">11.800 kr., heraf op til ca. 4.900 kr. i SVU-støtte. 3 dage i Lyngby og 3 dage online, samt ca. 2 dages forberedelse. Næste hold starter 3. november 2026.</div>
+          <div class="doc-h">4. Forventet udbytte</div>
+          <div class="doc-p">Afgangsopgaven er en konkret plan for eget team, som kan efterspørges som dokumentation for det faglige udbytte.</div>
           <div class="doc-factgrid">
             <div><b>Nettopris</b><span>ca. 6.900 kr.</span></div>
             <div><b>Tidsforbrug</b><span>6 dage + forberedelse</span></div>
             <div><b>Binding</b><span>Ingen — modul for modul</span></div>
-            <div><b>Kontaktperson</b><span>Peter Holm, DTU</span></div>
+            <div><b>Ansøgningsfrist</b><span>20. oktober 2026</span></div>
           </div>
-          <div class="doc-footer"><span>DTU Learn for Life · CVR 30060946</span><span>lifelonglearning.dtu.dk</span></div>
+          <div class="doc-h">Godkendelse</div>
+          <div class="doc-p">Godkendelse kan gives ved skriftligt svar til medarbejderen. Spørgsmål forud for fristen kan rettes til studievejleder Peter Holm.</div>
+          <div class="doc-footer"><span>Peter Holm, studievejleder · DTU Learn for Life</span><span>lifelonglearning.dtu.dk</span></div>
         </div>
       `}
     ]
