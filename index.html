@@ -194,35 +194,35 @@ h1{font-size:1.7rem; margin:5px 0 0; font-weight:700; letter-spacing:-0.01em;}
 .tag.dtu{background:var(--dtu-bg); color:var(--dtu-fg);}
 .tag.off{background:var(--off-bg); color:var(--off-fg);}
 
-.channel-cell{padding-bottom:13px;}
-.wf{margin-top:7px; display:flex; flex-direction:column; gap:5px;}
+.channel-cell{padding-bottom:14px;}
+.wf{margin-top:9px; display:flex; flex-direction:column; gap:7px;}
 .wf-box{
-  border:1px solid var(--line); border-radius:6px; background:#fff;
+  border:1.3px solid #d3d1c5; border-radius:8px; background:#fbfbf8;
   display:flex; align-items:center; justify-content:center;
   color:#c3c1b7; font-size:1.1rem; position:relative; overflow:hidden;
 }
 .wf-box.x::before, .wf-box.x::after{
-  content:""; position:absolute; width:141%; height:1px; background:var(--line);
+  content:""; position:absolute; width:145%; height:1.3px; background:#d3d1c5;
   top:50%; left:50%;
 }
 .wf-box.x::before{transform:translate(-50%,-50%) rotate(45deg);}
 .wf-box.x::after{transform:translate(-50%,-50%) rotate(-45deg);}
-.wf-h-lg{height:34px;}
-.wf-h-md{height:22px;}
-.wf-h-sm{height:14px;}
-.wf-line{height:6px; border-radius:3px; background:#e7e5db;}
+.wf-h-lg{height:38px;}
+.wf-h-md{height:26px;}
+.wf-h-sm{height:16px;}
+.wf-line{height:7px; border-radius:4px; background:#e2e0d3;}
 .wf-line.w60{width:60%;}
 .wf-line.w80{width:80%;}
 .wf-line.w40{width:40%;}
 .wf-line.w100{width:100%;}
-.wf-row{display:flex; gap:5px;}
+.wf-row{display:flex; gap:6px;}
 .wf-row .wf-box{flex:1;}
-.wf-dot{width:14px; height:14px; border-radius:50%; background:#e7e5db; flex-shrink:0;}
-.wf-btn{border:1px solid var(--line); border-radius:10px; height:16px; width:56px; background:#f5f4ee;}
-.wf-cal{display:flex; gap:3px; margin-top:2px;}
-.wf-cal-col{flex:1; height:34px; border-radius:4px; background:#f0efe6; border:1px solid var(--line);}
-.wf-cal-col.active{background:#c9c6b7;}
-.wf-field{border:1px solid var(--line); border-radius:5px; height:16px; background:#fff;}
+.wf-dot{width:16px; height:16px; border-radius:50%; border:1.3px solid #d3d1c5; background:#fbfbf8; flex-shrink:0;}
+.wf-btn{border:1.3px solid #b7b4a5; border-radius:12px; height:18px; width:60px; background:#f3f2e9;}
+.wf-cal{display:flex; gap:4px; margin-top:2px;}
+.wf-cal-col{flex:1; height:36px; border-radius:6px; background:#f6f5ee; border:1.3px solid #d3d1c5;}
+.wf-cal-col.active{background:#b7b4a5; border-color:#b7b4a5;}
+.wf-field{border:1.3px solid #d3d1c5; border-radius:6px; height:18px; background:#fbfbf8;}
 
 .cta-cell{display:flex; align-items:center; justify-content:center; min-height:50px;}
 .cta-btn{
@@ -243,6 +243,21 @@ h1{font-size:1.7rem; margin:5px 0 0; font-weight:700; letter-spacing:-0.01em;}
 .legend .knæk-tag{margin-top:0;}
 footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
 
+.journey-tabs{display:flex; gap:8px; margin-top:0; margin-bottom:20px; border-bottom:1px solid var(--line); padding-bottom:0;}
+.journey-tab{
+  border:none; background:none; color:var(--sub); font-size:0.82rem; font-weight:700;
+  padding:9px 4px 11px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px;
+  transition:color .15s, border-color .15s;
+}
+.journey-tab:hover{color:var(--ink);}
+.journey-tab.active{color:var(--ink); border-color:var(--ink);}
+.journey-panel{display:none;}
+.journey-panel.active{display:block;}
+.journey-empty{
+  border:1px dashed var(--line); border-radius:14px; padding:60px 24px;
+  text-align:center; color:var(--sub); font-size:0.85rem; margin-top:22px; background:var(--card);
+}
+
 @media (max-width: 1100px){
   .grid, .phasebar{grid-template-columns: 130px repeat(8, minmax(200px,1fr));}
 }
@@ -250,6 +265,12 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
 </head>
 <body>
 <div class="wrap">
+<div class="journey-tabs" id="journeyTabs">
+  <button class="journey-tab active" onclick="selectJourney(0)">1. Hans — Diplom i ledelse</button>
+  <button class="journey-tab" onclick="selectJourney(1)">2. Brugerrejse 2</button>
+  <button class="journey-tab" onclick="selectJourney(2)">3. Brugerrejse 3</button>
+</div>
+
 <header>
   <div class="title-block">
     <div class="kicker">DTU Learn for Life · Brugerrejse · Diplom i ledelse</div>
@@ -263,6 +284,8 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
     </div>
   </div>
 </header>
+
+<div class="journey-panel active" id="journeyPanel0">
 
 <div class="phasebar">
   <div class="lbl"></div>
@@ -508,6 +531,14 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
 <footer>Bare en skitse fra Claude · Hypotese til workshop 1.10 — ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF</footer>
 </div>
 
+<div class="journey-panel" id="journeyPanel1">
+  <div class="journey-empty">Brugerrejse 2 er endnu ikke beskrevet.</div>
+</div>
+<div class="journey-panel" id="journeyPanel2">
+  <div class="journey-empty">Brugerrejse 3 er endnu ikke beskrevet.</div>
+</div>
+</div>
+
 <div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -569,7 +600,7 @@ Mette Aabo, afdelingschef, sendte sin nye teamleder på ét diplommodul, inden d
     variants: [
       { label: "Hvad er det", url: "google.com/search?q=diplom+i+ledelse", html: `
         <div class="m-sub" style="font-size:0.68rem;">AI Overview</div>
-        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">En diplomuddannelse i ledelse er en offentligt anerkendt videregående uddannelse på 60 ECTS-point, som du tager på deltid ved siden af dit arbejde. Uddannelsen er sammensat af moduler, som kan tages enkeltvis — du forpligter dig ikke til hele uddannelsen fra start. Studieordningen er national, så indholdet er det samme, uanset hvilken institution du vælger.</div>
+        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">Diplom i ledelse er en offentlig efteruddannelse, du tager på deltid ved siden af jobbet. Du starter typisk med et enkelt modul, fx Fra specialist til leder, og beslutter først bagefter, om du vil fortsætte til hele uddannelsen. Studieordningen er den samme, uanset om du læser hos DTU, KP eller en anden udbyder — det er stedet og fagmiljøet, der gør forskellen.</div>
         <div class="m-hr"></div>
         <div class="m-title" style="font-size:0.8rem;">Diplomuddannelsen i Ledelse — DTU Learn for Life</div>
         <div class="m-sub">lifelonglearning.dtu.dk › diplomuddannelsen-i-ledelse</div>
@@ -693,26 +724,33 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     title: "Pakke til chefen",
     desc: "Email · trin 07, Afklarer med chefen",
     variants: [
-      { label: "Kort ark", url: "mail · fra: DTU Learn for Life", html: `
+      { label: "Materiale til lederen", url: "mail · fra: DTU Learn for Life", html: `
         <div class="m-avatarrow">
           <div class="dot-lg" style="width:22px;height:22px;"></div>
-          <div class="who"><b>Materiale til din leder</b><span>Til videresendelse</span></div>
+          <div class="who"><b>Klar til at tage med til din leder</b><span>Ét ark, til print eller videresendelse</span></div>
         </div>
-        <div class="m-copy">Et kort ark, du kan tage med til en samtale om finansiering af modulet:</div>
-        <div class="m-factbox" style="display:block;">
-          <div><b>Pris</b>11.800 kr. for modulet Fra specialist til leder</div>
-          <div style="margin-top:6px;"><b>Tidsforbrug</b>3-6 sammenhængende dage samt forberedelse</div>
-          <div style="margin-top:6px;"><b>Finansiering</b>Kan søges via SVU (Statens Voksenuddannelsesstøtte)</div>
+        <div class="m-copy">Her er en kort oversigt, du kan give din leder, med det vigtigste for at kunne sige ja til modulet Fra specialist til leder.</div>
+        <div class="m-hr"></div>
+        <div class="m-title" style="font-size:0.85rem;">Fra specialist til leder — til beslutningen</div>
+        <div class="m-factbox">
+          <div><b>Pris</b>11.800 kr.</div>
+          <div><b>Tidsforbrug</b>3-6 dage + forberedelse</div>
+          <div><b>Finansiering</b>Kan søges via SVU</div>
         </div>
-        <div class="m-btn outline">Download materialet (PDF)</div>
+        <div class="m-faq-q">Hvad får virksomheden ud af det?</div>
+        <div class="m-sub">En medarbejder, der går fra at løse opgaver til at sætte retning for et team — testet af på ét modul, før I forpligter jer til mere.</div>
+        <div class="m-btn outline">Download ét-siders ark (PDF)</div>
       `},
       { label: "Business case", url: "mail · fra: DTU Learn for Life", html: `
-        <div class="m-title">Argumenter for modulet internt</div>
-        <div class="m-copy">En uddybende version, hvis du skal begrunde beslutningen for din leder eller HR.</div>
+        <div class="m-title">Business case: modulet Fra specialist til leder</div>
+        <div class="m-sub">Til dig, der skal have et internt ja fra leder eller HR</div>
+        <div class="m-hr"></div>
         <div class="m-faq-q">Hvilket problem løser modulet?</div>
-        <div class="m-sub">Overgangen fra fagperson til leder, hvor mange nye ledere mangler konkrete redskaber.</div>
-        <div class="m-faq-q">Hvad kræver det af arbejdstid?</div>
-        <div class="m-sub">3-6 sammenhængende dage. Ingen forpligtelse til resten af uddannelsen.</div>
+        <div class="m-sub">Overgangen fra fagperson til leder er der, hvor de fleste nye ledere mangler konkrete redskaber — ikke teori, men metoder til at sætte retning for tidligere kolleger.</div>
+        <div class="m-faq-q">Hvad koster det, og hvad kræver det af tid?</div>
+        <div class="m-sub">11.800 kr. og 3-6 sammenhængende dage. Kan søges finansieret via SVU.</div>
+        <div class="m-faq-q">Er vi forpligtet til hele uddannelsen?</div>
+        <div class="m-sub">Nej. Modulet står alene, og I tager stilling til resten, når I har set effekten.</div>
         <div class="m-btn outline">Download business case (PDF)</div>
       `}
     ]
@@ -723,13 +761,16 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     variants: [
       { label: "Velkomstmail", url: "mail · fra: DTU Learn for Life", html: `
         <div class="m-title">Velkommen på Fra specialist til leder</div>
-        <div class="m-copy">Du er tilmeldt modulet, der starter [dato]. Her er, hvad du skal gøre inden studiestart:</div>
+        <div class="m-copy">Du er tilmeldt modulet, der starter [dato]. Sådan er du klar til dag 1:</div>
         <div class="m-faq-q">1. Aktiver din adgang til DTU Learn</div>
-        <div class="m-faq-q">2. Se litteraturlisten</div>
-        <div class="m-faq-q">3. Praktiske informationer inden dag 1</div>
+        <div class="m-sub">Din adgang er åben nu, så du kan gennemgå materialet i god tid.</div>
+        <div class="m-faq-q">2. Læs de to korte tekster i litteraturlisten</div>
+        <div class="m-sub">Du finder dem under fanen "Materialer" — sæt en time af, inden modulet starter.</div>
+        <div class="m-faq-q">3. Mød underviseren og de øvrige deltagere</div>
+        <div class="m-sub">Se navne og baggrunde, så du ved, hvem du sidder sammen med.</div>
         <div class="m-hr"></div>
-        <div class="m-sub">Vil du høre mere om, hvordan modulet passer ind i den samlede diplomuddannelse?</div>
-        <div class="m-btn">Book en samtale med en tidligere studerende</div>
+        <div class="m-sub">Vil du vide, hvordan dette modul passer ind i resten af diplomuddannelsen?</div>
+        <div class="m-btn outline">Se opbygningen af hele uddannelsen</div>
       `},
       { label: "Kvitteringsside", url: "lifelonglearning.dtu.dk/kurv/kvittering", html: `
         <div class="m-title">Tak for din tilmelding</div>
@@ -779,6 +820,11 @@ function closeModal(){
   document.getElementById('modalBackdrop').classList.remove('open');
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+function selectJourney(i){
+  document.querySelectorAll('.journey-tab').forEach((el,idx)=> el.classList.toggle('active', idx===i));
+  document.querySelectorAll('.journey-panel').forEach((el,idx)=> el.classList.toggle('active', idx===i));
+}
 </script>
 </body>
 </html>
