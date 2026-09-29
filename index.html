@@ -2,7 +2,7 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
-<title>DTU LFL — Brugerrejse: Diplom i ledelse</title>
+<title>DTU LFL: Brugerrejse, diplom i ledelse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -240,6 +240,16 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 .li-text{font-size:0.83rem; line-height:1.5; margin-top:10px; white-space:pre-wrap;}
 .li-text .li-seemore{color:#00000099; font-weight:600;}
 .li-hashtag{color:#0a66c2; font-weight:600;}
+.li-linkcard{
+  margin-top:10px; border:1px solid #e9e5df; border-radius:6px; overflow:hidden; display:flex; align-items:center;
+}
+.li-linkcard .li-linkcard-thumb{
+  width:64px; height:64px; flex-shrink:0; background:#0a2a5e; color:#fff; font-weight:800; font-size:0.85rem;
+  display:flex; align-items:center; justify-content:center; text-align:center; letter-spacing:-0.01em;
+}
+.li-linkcard .li-linkcard-body{padding:9px 12px; min-width:0;}
+.li-linkcard .li-linkcard-title{font-size:0.78rem; font-weight:600; color:#000000e6; line-height:1.3;}
+.li-linkcard .li-linkcard-url{font-size:0.68rem; color:#00000099; margin-top:3px; text-transform:uppercase; letter-spacing:0.02em;}
 .li-image{
   margin-top:10px; border-top:3px solid #990000; overflow:hidden; border-left:1px solid #e9e5df;
   border-right:1px solid #e9e5df; border-bottom:1px solid #e9e5df;
@@ -364,7 +374,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 <body>
 <div class="ramme"><div class="slide" id="slide">
 <div class="journey-tabs" id="journeyTabs">
-  <button class="journey-tab active" onclick="selectJourney(0)">1. Hans — Diplom i ledelse</button>
+  <button class="journey-tab active" onclick="selectJourney(0)">1. Hans, diplom i ledelse</button>
   <button class="journey-tab" onclick="selectJourney(1)">2. Brugerrejse 2</button>
   <button class="journey-tab" onclick="selectJourney(2)">3. Brugerrejse 3</button>
 </div>
@@ -606,7 +616,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
   <div class="item"><span class="swatch dashed"></span> blødt trin før købet</div>
   <div class="item"><span class="knæk-tag">KNÆK</span> hvor rejsen knækker i dag</div>
 </div>
-<footer>Bare en skitse fra Claude · Hypotese til workshop 1.10 — ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF<span class="kilde">iO Bonzai</span></footer>
+<footer>Bare en skitse fra Claude · Hypotese til workshop 1.10, ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF<span class="kilde">iO Bonzai</span></footer>
 </div>
 </div>
 
@@ -656,23 +666,26 @@ const DRAFTS = [
             </div>
             <button class="li-more">···</button>
           </div>
-          <div class="li-text">For to år siden stod Peter Holm med en teknisk titel og et team, han lige havde fået ansvar for. I dag er han projektleder.
+          <div class="li-text">Det var Peter Holms egen chef, der først nævnte diplomuddannelsen for ham.
 
-"Jeg havde 12 år som specialist i vindenergibranchen bag mig, da min chef spurgte, om jeg ville tage over for min gamle teamleder. Den faglige del var jeg tryg ved. Det, jeg ikke havde prøvet, var at give retning til folk, jeg lige havde stået side om side med ved samme skrivebord."
+Peter var specialist i vindenergibranchen, da han skulle overtage ledelsen af sit gamle team. Han kendte ikke uddannelsen og vidste ikke, at man kan tage den ét modul ad gangen i stedet for at forpligte sig til det hele fra start.
 
-Peter startede ikke med en hel uddannelse. Han tilmeldte sig ét modul: Fra specialist til leder, 5 ECTS, tre sammenhængende dage.
+Han startede med modulet Fra specialist til leder og er i dag projektleder.
 
-"Jeg ville teste, om det gav noget, før jeg forpligtede mig til mere. Det gjorde det. Jeg fik konkrete redskaber til de samtaler, jeg gik og var usikker på — ikke teori for teoriens skyld."
-
-Han er nu i gang med modul to af diplomuddannelsen i ledelse, som han tager i sit eget tempo, ved siden af jobbet.
-
-Kender du en fagperson, der står, hvor Peter stod? Modulet ligger på DTU's temaside om ledelse. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#lederudvikling</span> <span class="li-hashtag">#diplomuddannelse</span> <span class="li-seemore">...se mere</span></div>
+Har din chef eller en kollega nævnt en lederuddannelse for dig, uden du helt vidste, hvad den indebar? Se, hvordan diplom i ledelse er bygget op. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#lederudvikling</span> <span class="li-seemore">...se mere</span></div>
           <div class="li-image">
             <span class="li-image-label">Billede: Peter Holm, portræt på kontoret [indsæt rigtigt foto]</span>
             <div class="li-quote">
               <span class="li-quote-mark">"</span>
-              <div class="li-quote-text">Jeg skulle lære at give retning til folk, jeg lige havde stået side om side med</div>
+              <div class="li-quote-text">Det var min egen chef, der først nævnte uddannelsen for mig</div>
               <div class="li-quote-who">Peter Holm<br>Projektleder, tidl. specialist i vindenergibranchen</div>
+            </div>
+          </div>
+          <div class="li-linkcard">
+            <div class="li-linkcard-thumb">DTU</div>
+            <div class="li-linkcard-body">
+              <div class="li-linkcard-title">Diplomuddannelsen i Ledelse: opbygning, moduler og pris</div>
+              <div class="li-linkcard-url">lifelonglearning.dtu.dk</div>
             </div>
           </div>
           <div class="li-stats">
@@ -701,23 +714,28 @@ Kender du en fagperson, der står, hvor Peter stod? Modulet ligger på DTU's tem
             </div>
             <button class="li-more">···</button>
           </div>
-          <div class="li-text">Hvordan ved man, om en medarbejder er klar til at blive leder — uden at gætte?
+          <div class="li-text">Mette Aabo tog selv diplomuddannelsen i ledelse for et par år siden. Da en af hendes specialister skulle rykke op som leder, var det naturligt for hende at nævne den for ham.
 
-Mette Aabo, afdelingschef, stod med præcis det spørgsmål, da en af hendes stærkeste specialister skulle rykke op og lede sit gamle team.
+Han kendte ikke uddannelsen. Det gør de færreste, før en chef eller kollega nævner den.
 
-"Vi talte om det i lang tid, men jeg ville ikke bare sende ham på en hel uddannelse uden at vide, om det gav mening for ham. Så vi startede med et enkelt modul hos DTU: Fra specialist til leder. Tre dage, en klar pris, ingen binding til resten."
+Mette fortalte ham, at man ikke behøver forpligte sig til hele uddannelsen fra start, man kan starte med ét modul og se, om det er noget for en.
 
-Modulet blev en fælles øvelse. Efter de tre dage havde både Mette og hendes medarbejder et bedre grundlag for at beslutte, om resten af diplomuddannelsen gav mening.
+Han startede med modulet Fra specialist til leder og er nu i gang med de næste.
 
-"Vi ville se, om det gav værdi, før vi forpligtede os til en hel uddannelse. Det gjorde det — og nu er han i gang med modul to, mens vi løbende følger, om det passer med resten af hans udvikling."
-
-Er du selv chef for en fagperson, der er på vej mod sin første lederrolle? Modulet er en lav-risiko måde at starte samtalen. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#ledelse</span> <span class="li-hashtag">#kompetenceudvikling</span> <span class="li-seemore">...se mere</span></div>
+Har du selv taget en diplomuddannelse, og har du en medarbejder på vej i samme retning? Se, hvordan uddannelsen er bygget op. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#ledelse</span> <span class="li-seemore">...se mere</span></div>
           <div class="li-image">
             <span class="li-image-label">Billede: Mette Aabo, portræt i mødelokale [indsæt rigtigt foto]</span>
             <div class="li-quote">
               <span class="li-quote-mark">"</span>
-              <div class="li-quote-text">Vi ville se, om det gav værdi, før vi forpligtede os til en hel uddannelse</div>
+              <div class="li-quote-text">Han behøver ikke beslutte sig for hele uddannelsen på én gang</div>
               <div class="li-quote-who">Mette Aabo<br>Afdelingschef</div>
+            </div>
+          </div>
+          <div class="li-linkcard">
+            <div class="li-linkcard-thumb">DTU</div>
+            <div class="li-linkcard-body">
+              <div class="li-linkcard-title">Diplomuddannelsen i Ledelse: opbygning, moduler og pris</div>
+              <div class="li-linkcard-url">lifelonglearning.dtu.dk</div>
             </div>
           </div>
           <div class="li-stats">
@@ -743,16 +761,16 @@ Er du selv chef for en fagperson, der er på vej mod sin første lederrolle? Mod
     variants: [
       { label: "Hvad er det", url: "google.com/search?q=diplom+i+ledelse", html: `
         <div class="m-sub" style="font-size:0.68rem;">AI Overview</div>
-        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">Diplom i ledelse er en offentlig efteruddannelse, du tager på deltid ved siden af jobbet. Du starter typisk med et enkelt modul, fx Fra specialist til leder, og beslutter først bagefter, om du vil fortsætte til hele uddannelsen. Studieordningen er den samme, uanset om du læser hos DTU, KP eller en anden udbyder — det er stedet og fagmiljøet, der gør forskellen.</div>
+        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">Diplom i ledelse er en offentlig efteruddannelse, du tager på deltid ved siden af jobbet. Du starter typisk med et enkelt modul, fx Fra specialist til leder, og beslutter først bagefter, om du vil fortsætte til hele uddannelsen. Studieordningen er den samme, uanset om du læser hos DTU, KP eller en anden udbyder. Det er stedet og fagmiljøet, der gør forskellen.</div>
         <div class="m-hr"></div>
-        <div class="m-title" style="font-size:0.8rem;">Diplomuddannelsen i Ledelse — DTU Learn for Life</div>
+        <div class="m-title" style="font-size:0.8rem;">Diplomuddannelsen i Ledelse, DTU Learn for Life</div>
         <div class="m-sub">lifelonglearning.dtu.dk › diplomuddannelsen-i-ledelse</div>
       `},
       { label: "Er det for mig", url: "google.com/search?q=diplom+i+ledelse+tekniske+ledere", html: `
         <div class="m-sub" style="font-size:0.68rem;">AI Overview</div>
-        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">Diplom i ledelse er relevant, hvis du kommer fra en faglig eller teknisk baggrund og skal til at lede specialister for første gang, eller allerede gør det og vil formalisere kompetencerne. Du kan starte med et enkelt modul — fx Fra specialist til leder — og senere afgøre, om du vil fortsætte mod en samlet uddannelse.</div>
+        <div class="m-copy" style="background:#f7f7f2; border-radius:10px; padding:13px; border:1px solid var(--line);">Diplom i ledelse er relevant, hvis du kommer fra en faglig eller teknisk baggrund og skal til at lede specialister for første gang, eller allerede gør det og vil formalisere kompetencerne. Du kan starte med et enkelt modul, fx Fra specialist til leder, og senere afgøre, om du vil fortsætte mod en samlet uddannelse.</div>
         <div class="m-hr"></div>
-        <div class="m-title" style="font-size:0.8rem;">Fra specialist til leder — DTU Learn for Life</div>
+        <div class="m-title" style="font-size:0.8rem;">Fra specialist til leder, DTU Learn for Life</div>
         <div class="m-sub">lifelonglearning.dtu.dk › fra-specialist-til-leder</div>
       `}
     ]
@@ -798,7 +816,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-btn">Se alle moduler</div>
       `},
       { label: "Samleside uddannelse", url: "lifelonglearning.dtu.dk/engineering-technology/diplom/diplomuddannelsen-i-ledelse", html: `
-        <div class="m-title">Diplomuddannelsen i Ledelse — opbygning</div>
+        <div class="m-title">Diplomuddannelsen i Ledelse: opbygning</div>
         <div class="m-copy">Uddannelsen består af tre obligatoriske moduler, tre valgfag og et afgangsprojekt. Du tilmelder dig typisk ét modul ad gangen og har op til seks år til at gennemføre.</div>
         <div class="m-calrow">
           <div class="m-calday active">Modul 1</div><div class="m-calday">Modul 2</div><div class="m-calday">Modul 3</div><div class="m-calday">Valgfag</div>
@@ -821,7 +839,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         </div>
         <div class="m-copy">Modulet er målrettet dig, der har en stærk faglig baggrund og nu skal lede tidligere kolleger eller andre specialister. Du får konkrete redskaber til at etablere autoritet, sætte retning og navigere relationer, der skifter karakter.</div>
         <div class="m-hr"></div>
-        <div class="m-quote">"Det var det modul, jeg havde mest brug for — ikke teori for teoriens skyld, men noget jeg kunne bruge om mandagen."</div>
+        <div class="m-quote">"Det var det modul, jeg havde mest brug for. Ikke teori for teoriens skyld, men noget jeg kunne bruge om mandagen."</div>
         <div class="m-cite">Deltager, forårssemester</div>
         <div class="m-btn">Tilføj til kurv</div>
       `},
@@ -926,7 +944,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
           <div class="doc-factgrid">
             <div><b>Nettopris</b><span>ca. 6.900 kr.</span></div>
             <div><b>Tidsforbrug</b><span>6 dage + forberedelse</span></div>
-            <div><b>Binding</b><span>Ingen — modul for modul</span></div>
+            <div><b>Binding</b><span>Ingen, modul for modul</span></div>
             <div><b>Ansøgningsfrist</b><span>20. oktober 2026</span></div>
           </div>
           <div class="doc-h">Godkendelse</div>
@@ -946,7 +964,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-faq-q">1. Aktiver din adgang til DTU Learn</div>
         <div class="m-sub">Din adgang er åben nu, så du kan gennemgå materialet i god tid.</div>
         <div class="m-faq-q">2. Læs de to korte tekster i litteraturlisten</div>
-        <div class="m-sub">Du finder dem under fanen "Materialer" — sæt en time af, inden modulet starter.</div>
+        <div class="m-sub">Du finder dem under fanen "Materialer". Sæt en time af, inden modulet starter.</div>
         <div class="m-faq-q">3. Mød underviseren og de øvrige deltagere</div>
         <div class="m-sub">Se navne og baggrunde, så du ved, hvem du sidder sammen med.</div>
         <div class="m-hr"></div>
