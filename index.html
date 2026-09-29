@@ -80,12 +80,13 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
   border-right:1.5px solid var(--line); border-top:1.5px solid var(--line); transform:rotate(45deg);
 }
 
-.rows{display:grid; grid-template-rows:1.05fr 1fr 1.15fr .52fr; row-gap:14px; min-height:0;}
+.rows{display:grid; grid-template-rows:minmax(0,1.05fr) minmax(0,1fr) minmax(0,1.15fr) minmax(0,.52fr); row-gap:14px; min-height:0;}
 .raekke{
   display:grid;
   grid-template-columns: 150px repeat(8, 1fr);
   column-gap:14px;
   align-items:stretch;
+  min-height:0;
 }
 .raekke.ai-row{background:var(--row-bg); margin-inline:-56px; padding:12px 56px; position:relative;}
 .rowlabel{
@@ -98,18 +99,18 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 .cell{
   background:var(--card); border:1.5px solid var(--line); border-radius:6px;
   padding:12px 13px; min-height:0; position:relative; box-shadow:none;
-  transition:box-shadow .18s, transform .18s; min-width:0;
+  transition:box-shadow .18s, transform .18s; min-width:0; overflow:hidden;
 }
 .step-n{font:500 12px var(--mono); color:var(--sub); margin-bottom:2px; letter-spacing:0.02em;}
 .step-title{font-size:17px; font-weight:600; margin:0;}
-.step-quote{font-size:14.5px; color:var(--sub); font-style:italic; line-height:1.4;}
+.step-quote{font-size:14.5px; color:var(--sub); font-style:italic; line-height:1.4; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden;}
 .cell.knæk{border-style:dashed;}
 .knæk-tag{
   display:inline-block; margin-top:auto; align-self:flex-start; font:500 11px var(--mono); text-transform:uppercase;
   color:var(--ink); background:transparent; border:1.2px solid var(--ink);
   border-radius:3px; padding:1px 5px; letter-spacing:0.06em;
 }
-.raekke > .cell{display:flex; flex-direction:column; gap:6px;}
+.raekke > .cell{display:flex; flex-direction:column; gap:6px; min-height:0; overflow:hidden;}
 .raekke.journey-row > .cell:not(:last-child)::after{
   content:"→"; position:absolute; right:-14px; top:50%; transform:translate(50%,-50%);
   font-size:16px; color:var(--sub); background:var(--papir); line-height:1; padding:2px 0; z-index:1;
@@ -124,7 +125,7 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 .content-cell{cursor:pointer; background:var(--papir); margin-inline:0;}
 .content-cell:hover{box-shadow:var(--shadow-hover); transform:translateY(-2px); border-color:var(--ink);}
 .content-cell .c-title{font-size:15.5px; font-weight:600; margin:0;}
-.content-cell .c-desc{font-size:13.5px; color:var(--sub); line-height:1.4;}
+.content-cell .c-desc{font-size:13.5px; color:var(--sub); line-height:1.4; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;}
 .content-cell .lines{margin-top:auto; display:grid; gap:5px;}
 .content-cell .lines i{height:6px; border-radius:3px; background:var(--line-soft); display:block;}
 .content-cell .lines i:nth-child(2){width:82%;}
@@ -134,6 +135,13 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 }
 .content-cell .open-hint::after{content:" →"; transition:margin .15s;}
 .content-cell:hover .open-hint::after{margin-left:3px;}
+
+.content-cell.done{background:#e9f3ea; border-color:#2f6b3f;}
+.content-cell.done .open-hint{color:#2f6b3f;}
+.content-cell.key{background:var(--ink); border-color:var(--ink);}
+.content-cell.key .c-title, .content-cell.key .c-desc, .content-cell.key .open-hint{color:#fff;}
+.content-cell.key .lines i{background:#4a4a45;}
+.content-cell.key .open-hint::after{color:#fff;}
 
 .modal-backdrop{
   display:none; position:fixed; inset:0; background:rgba(15,15,12,0.6);
@@ -147,6 +155,7 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
   box-shadow:0 24px 70px rgba(0,0,0,0.34);
   animation:pop .16s ease-out;
 }
+.modal.wide{max-width:980px;}
 @keyframes pop{from{opacity:0; transform:translateY(6px) scale(0.985);} to{opacity:1; transform:none;}}
 .modal-head{
   padding:20px 24px 14px; border-bottom:1px solid var(--line);
@@ -297,6 +306,77 @@ h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 .doc-page .doc-quote{border-left:3px solid #990000; padding-left:12px; margin:16px 0; font-style:italic; color:#0a2a5e; font-size:0.82rem; line-height:1.45;}
 .doc-page .doc-footer{margin-top:20px; padding-top:12px; border-top:1px solid var(--line); font-size:0.66rem; color:var(--sub); display:flex; justify-content:space-between;}
 
+.site-page{
+  background:#fff; border:1px solid var(--line); border-radius:2px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08); font-family:"IBM Plex Sans",sans-serif;
+}
+.site-page .site-nav{
+  display:flex; align-items:center; justify-content:space-between; padding:12px 22px;
+  border-bottom:1px solid #e5e5e0;
+}
+.site-page .site-nav .site-logo{display:flex; align-items:center; gap:7px; font-weight:700; font-size:0.82rem; color:#0a2a5e;}
+.site-page .site-nav .site-logo .site-logo-mark{width:20px; height:20px; border-radius:3px; background:#990000; flex-shrink:0;}
+.site-page .site-nav .site-links{display:flex; gap:16px; font-size:0.68rem; color:var(--sub); font-weight:500;}
+.site-page .site-nav .site-links span.active{color:var(--ink); font-weight:700;}
+.site-page .site-hero{
+  padding:26px 24px 22px; background:linear-gradient(180deg,#f7f7f2 0%, #fff 100%);
+}
+.site-page .site-hero .site-eyebrow{font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:#990000; font-weight:700; margin-bottom:6px;}
+.site-page .site-hero h3{font-size:1.15rem; font-weight:700; margin:0 0 8px; color:#0a2a5e; letter-spacing:-0.005em; line-height:1.25;}
+.site-page .site-hero .site-lede{font-size:0.8rem; line-height:1.55; color:#3d3d3d; max-width:520px; margin:0 0 14px;}
+.site-page .site-btn{
+  display:inline-block; background:#990000; color:#fff; font-size:0.72rem; font-weight:600;
+  padding:8px 16px; border-radius:3px;
+}
+.site-page .site-btn.outline{background:none; color:#0a2a5e; border:1.5px solid #0a2a5e;}
+.site-page .site-body{padding:20px 24px 26px;}
+.site-page .site-h{font-weight:700; font-size:0.86rem; margin:18px 0 6px; color:#0a2a5e;}
+.site-page .site-h:first-child{margin-top:0;}
+.site-page .site-p{color:#3d3d3d; line-height:1.55; font-size:0.78rem; margin:0 0 8px;}
+.site-page .site-cards{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:14px 0;}
+.site-page .site-card{border:1px solid var(--line); border-radius:6px; padding:12px; background:#fafaf7;}
+.site-page .site-card .site-card-tag{font-size:0.6rem; text-transform:uppercase; letter-spacing:0.05em; color:#990000; font-weight:700; margin-bottom:4px;}
+.site-page .site-card .site-card-title{font-size:0.78rem; font-weight:700; margin-bottom:4px; color:var(--ink);}
+.site-page .site-card .site-card-meta{font-size:0.68rem; color:var(--sub);}
+.site-page .site-quote{border-left:3px solid #990000; padding-left:12px; margin:16px 0; font-style:italic; color:#0a2a5e; font-size:0.8rem; line-height:1.45;}
+.site-page .site-footer{margin-top:18px; padding-top:14px; border-top:1px solid #e5e5e0; font-size:0.66rem; color:var(--sub); display:flex; justify-content:space-between;}
+
+.wf-page{border:1.5px solid var(--ink); background:#fff; font-family:"IBM Plex Sans",sans-serif;}
+.wf-lbl{font-family:var(--mono); font-size:0.6rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--sub); margin-bottom:5px; font-weight:600;}
+.wf-sec{border-bottom:1.5px dashed var(--line); padding:16px 18px;}
+.wf-sec:last-child{border-bottom:none;}
+.wf-sec.tight{padding:12px 18px;}
+.wf-hero{padding:20px 18px 18px; border-bottom:1.5px solid var(--ink);}
+.wf-hero .wf-h1{margin:10px 0 14px;}
+.wf-hero .wf-p.lede{margin:0 0 18px;}
+.wf-hero .wf-stat{margin:0 0 20px;}
+.wf-h1{font-weight:700; font-size:1.25rem; margin:2px 0 8px; letter-spacing:-0.01em; line-height:1.2;}
+.wf-h2{font-weight:700; font-size:0.92rem; margin:0 0 10px;}
+.wf-p{color:#3d3d3d; line-height:1.55; margin:0 0 8px; font-size:0.78rem;}
+.wf-p.lede{font-size:0.86rem; max-width:640px;}
+.wf-grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+.wf-grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.wf-card{border:1.5px solid var(--ink); padding:11px 12px;}
+.wf-card.fill{background:var(--ink); color:#fff;}
+.wf-card.fill .wf-lbl, .wf-card.fill .wf-card-m{color:#d8d8d3;}
+.wf-card .wf-card-t{font-weight:700; font-size:0.84rem; margin:3px 0 4px; line-height:1.3;}
+.wf-card .wf-card-m{color:var(--sub); font-size:0.68rem; line-height:1.4;}
+.wf-btn{display:inline-block; border:1.5px solid var(--ink); padding:7px 15px; font-weight:700; font-size:0.74rem; margin-right:8px;}
+.wf-btn.solid{background:var(--ink); color:#fff;}
+.wf-vid{border:1.5px solid var(--ink); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(45deg,#f2f2ee,#f2f2ee 9px,#e6e6e0 9px,#e6e6e0 18px); font-size:1.8rem; margin-bottom:8px; color:var(--ink);}
+.wf-quote-row{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+.wf-quote{border:1.5px solid var(--ink); padding:12px; font-size:0.78rem; line-height:1.45; font-style:italic; position:relative;}
+.wf-quote .wf-quote-who{margin-top:8px; font-style:normal; font-size:0.66rem; color:var(--sub); font-family:var(--mono); text-transform:uppercase; letter-spacing:0.04em;}
+.wf-faq-row{border-top:1.2px dashed var(--line); padding:9px 0;}
+.wf-faq-row:first-of-type{border-top:none;}
+.wf-faq-q{font-weight:700; font-size:0.79rem;}
+.wf-faq-a{color:var(--sub); font-size:0.73rem; margin-top:3px; line-height:1.45;}
+.wf-foot{border-top:1.5px solid var(--ink); padding:9px 18px; display:flex; justify-content:space-between; color:var(--sub); font-family:var(--mono); font-size:0.66rem;}
+.wf-stat{display:flex; gap:22px; margin:4px 0 4px;}
+.wf-stat div{border-left:2.5px solid var(--ink); padding-left:10px;}
+.wf-stat b{display:block; font-size:1rem; font-weight:700;}
+.wf-stat span{font-size:0.64rem; color:var(--sub); text-transform:uppercase; letter-spacing:0.03em;}
+
 .tag{
   display:inline-block; font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:0.06em;
   color:var(--sub); border:1.2px solid var(--line); border-radius:3px; padding:1px 5px; white-space:nowrap;
@@ -368,7 +448,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 <div class="journey-tabs" id="journeyTabs">
   <button class="journey-tab active" onclick="selectJourney(0)">1. Hans, diplom i ledelse</button>
   <button class="journey-tab" onclick="selectJourney(1)">2. Marianne, Master of Wind Energy</button>
-  <button class="journey-tab" onclick="selectJourney(2)">3. Brugerrejse 3</button>
+  <button class="journey-tab" onclick="selectJourney(2)">3. Line, enkeltfag</button>
 </div>
 
 <div class="journey-panel active" id="journeyPanel0">
@@ -447,7 +527,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 <div class="raekke ai-row">
   <div class="rowlabel">Content<span class="sub">Hvad der skal ligge klar</span><div class="ai-tag">Genereres med AI<br>i iO Bonzai</div></div>
 
-  <div class="cell content-cell" onclick="openModal(0)">
+  <div class="cell content-cell key" onclick="openModal(0)">
     <div class="c-title">Historier fra tidligere studerende</div>
     <div class="c-desc">Fra fagekspert til leder, fortalt af en DTU-alumne</div>
     <div class="lines"><i></i><i></i><i></i></div>
@@ -483,7 +563,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
     <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
-  <div class="cell content-cell" onclick="openModal(6)">
+  <div class="cell content-cell key" onclick="openModal(6)">
     <div class="c-title">Pakke til chefen</div>
     <div class="c-desc">Pris, finansiering (SVU), tidsforbrug og udbytte for virksomheden</div>
     <div class="lines"><i></i><i></i><i></i></div>
@@ -617,7 +697,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 <header>
   <div class="title-block">
     <div class="kicker">DTU Learn for Life · Brugerrejse · Master of Wind Energy</div>
-    <h1>Fra en søgning på et emne til en ansøgning ti måneder efter</h1>
+    <h1>Fra en søgning på et emne til en ansøgning</h1>
   </div>
   <div class="persona">
     <div class="avatar"></div>
@@ -693,7 +773,7 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 <div class="raekke ai-row">
   <div class="rowlabel">Content<span class="sub">Hvad der skal ligge klar</span><div class="ai-tag">Genereres med AI<br>i iO Bonzai</div></div>
 
-  <div class="cell content-cell" onclick="openModal(8)">
+  <div class="cell content-cell key" onclick="openModal(8)">
     <div class="c-title">Temaside om vindenergi</div>
     <div class="c-desc">Fanger emnesøgninger og sætter en retargeting-pixel</div>
     <div class="lines"><i></i><i></i><i></i></div>
@@ -705,13 +785,13 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
     <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
-  <div class="cell content-cell" onclick="openModal(10)">
+  <div class="cell content-cell key" onclick="openModal(10)">
     <div class="c-title">LinkedIn-case</div>
     <div class="c-desc">En ingeniør, der har taget kurser i vindenergi på DTU</div>
     <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
-  <div class="cell content-cell" onclick="openModal(11)">
+  <div class="cell content-cell key" onclick="openModal(11)">
     <div class="c-title">Case-side med video og podcast</div>
     <div class="c-desc">Uddyber casen og fører videre til masterclassen</div>
     <div class="lines"><i></i><i></i><i></i></div>
@@ -871,12 +951,248 @@ footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
 </div>
 </div>
 <div class="journey-panel" id="journeyPanel2">
-  <div class="journey-empty">Brugerrejse 3 er endnu ikke beskrevet.</div>
+
+<header>
+  <div class="title-block">
+    <div class="kicker">DTU Learn for Life · Brugerrejse · Enkeltfag</div>
+    <h1>Fra et fagligt problem til et enkeltfag</h1>
+  </div>
+  <div class="persona">
+    <div class="avatar"></div>
+    <div>
+      <h3>Line, rådgivende ingeniør, der arbejder mere og mere med vindenergi</h3>
+      <p>Vindenergi er kommet ind i hendes projekter. Ved ikke, hvad der findes, og leder både efter kurser og godt fagligt indhold.</p>
+    </div>
+  </div>
+</header>
+
+<div class="phasebar">
+  <div class="lbl"></div>
+  <div class="phase-group">Behov</div>
+  <div class="phase-group span2">Søgning</div>
+  <div class="phase-group span2">Vurdering</div>
+  <div class="phase-group span3">Beslutning</div>
+</div>
+
+<div class="rows">
+<div class="raekke journey-row">
+  <div class="rowlabel">Brugerrejse<span class="sub">Hvad Line gør og tænker</span></div>
+
+  <div class="cell">
+    <div class="step-n">01</div>
+    <div class="step-title">Behovet opstår</div>
+    <div class="step-quote">"Jeg skal være skarpere på det her."</div>
+  </div>
+  <div class="cell knæk">
+    <div class="step-n">02</div>
+    <div class="step-title">Googler emnet</div>
+    <div class="step-quote">"Vindenergi til rådgivere. Hvad findes der egentlig?"</div>
+    <span class="knæk-tag">KNÆK</span>
+  </div>
+  <div class="cell">
+    <div class="step-n">03</div>
+    <div class="step-title">Ser en annonce</div>
+    <div class="step-quote">"Havvindmølleparker og nettilslutning. Det er lige det, jeg bruger."</div>
+  </div>
+  <div class="cell knæk">
+    <div class="step-n">04</div>
+    <div class="step-title">Vurderer kurset</div>
+    <div class="step-quote">"Er det mit niveau? Hvad betyder 'kandidat'?"</div>
+    <span class="knæk-tag">KNÆK</span>
+  </div>
+  <div class="cell knæk">
+    <div class="step-n">05</div>
+    <div class="step-title">Kan det passe med jobbet?</div>
+    <div class="step-quote">"13 uger med opgaver hver uge. Findes det online, og hvor meget tid tager det?"</div>
+    <span class="knæk-tag">KNÆK</span>
+  </div>
+  <div class="cell knæk">
+    <div class="step-n">06</div>
+    <div class="step-title">Spørger en fagperson</div>
+    <div class="step-quote">"Jeg skriver lige til kursuslederen."</div>
+    <span class="knæk-tag">KNÆK</span>
+  </div>
+  <div class="cell">
+    <div class="step-n">07</div>
+    <div class="step-title">Får chefens ja</div>
+    <div class="step-quote">"Nu har jeg argumenterne til min chef."</div>
+  </div>
+  <div class="cell knæk">
+    <div class="step-n">08</div>
+    <div class="step-title">Tilmelder sig og venter</div>
+    <div class="step-quote">"Jeg har lagt det i kurven. Er jeg så optaget?"</div>
+    <span class="knæk-tag">KNÆK</span>
+  </div>
+</div>
+
+<div class="raekke ai-row">
+  <div class="rowlabel">Content<span class="sub">Hvad der skal ligge klar</span><div class="ai-tag">Genereres med AI<br>i iO Bonzai</div></div>
+
+  <div class="cell content-cell key" onclick="openModal(17)">
+    <div class="c-title">Fagligt indhold om vindenergi</div>
+    <div class="c-desc">Artikler om nettilslutning og havvind, der også viser, at DTU har kurser</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell key" onclick="openModal(18)">
+    <div class="c-title">Emneside om vindenergi til rådgivere</div>
+    <div class="c-desc">Skrevet med fagfolks egne ord, så Google og AI-svar kan citere den</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell" onclick="openModal(19)">
+    <div class="c-title">Annonce i fagfolks ord</div>
+    <div class="c-desc">Nettilslutning og havvindmølleparker, ikke kun kursets titel</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell key" onclick="openModal(20)">
+    <div class="c-title">Niveau i ord</div>
+    <div class="c-desc">Hvem kurset passer til, hvad man skal kunne, og hvad man kan bagefter</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell" onclick="openModal(21)">
+    <div class="c-title">Sammenligning af beslægtede kurser</div>
+    <div class="c-desc">Format, niveau og tidsforbrug side om side</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell" onclick="openModal(22)">
+    <div class="c-title">Kontaktformular til kursuslederen</div>
+    <div class="c-desc">Fagligt spørgsmål, sendes videre og gemmes i HubSpot</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell" onclick="openModal(23)">
+    <div class="c-title">Kort materiale til chefen</div>
+    <div class="c-desc">Udbytte for virksomheden, pris, tidsforbrug og firmakurser</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+  <div class="cell content-cell" onclick="openModal(24)">
+    <div class="c-title">Hvad sker der nu</div>
+    <div class="c-desc">Tilmelding er ikke optagelse: adgangskrav, ledige pladser, svar før start</div>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="open-hint">Se udkast</div>
+  </div>
+</div>
+
+<div class="raekke">
+  <div class="rowlabel">Kanal / sidetype<span class="sub">Hvor Line møder det</span></div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Projekter og kolleger</b></div>
+    <span class="tag off">Offsite</span>
+    <div class="wf">
+      <div class="raek"><span class="prik"></span><div class="bar" style="flex:1"></div></div>
+      <div class="x"></div>
+      <div class="bar lys"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Google og AI-svar</b></div>
+    <span class="tag off">Offsite</span>
+    <div class="wf">
+      <div class="soeg"></div>
+      <div class="ai"><div class="bar"></div><div class="bar lys"></div><div class="bar lys" style="width:70%"></div></div>
+      <div class="bar" style="width:60%"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Google Ads</b></div>
+    <span class="tag off">Offsite</span>
+    <div class="wf">
+      <div class="soeg"></div>
+      <div class="bar" style="width:60%"></div>
+      <div class="bar lys"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Enkeltfagsside</b></div>
+    <span class="tag on">DTU</span>
+    <div class="wf">
+      <div class="x"></div>
+      <div class="raek"><div class="felt" style="flex:1"></div><div class="felt" style="flex:1"></div><div class="felt" style="flex:1"></div></div>
+      <div class="knap"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Relaterede kurser</b></div>
+    <span class="tag on">DTU</span>
+    <div class="wf">
+      <div class="bar" style="width:50%"></div>
+      <div class="kort3"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Kontaktformular</b></div>
+    <span class="tag on">DTU</span>
+    <div class="wf">
+      <div class="raek"><span class="prik"></span><div class="bar" style="flex:1"></div></div>
+      <div class="felt"></div>
+      <div class="felt" style="width:70%"></div>
+      <div class="knap"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Email</b></div>
+    <span class="tag on">DTU</span>
+    <div class="wf">
+      <div class="raek"><span class="prik"></span><div class="bar" style="flex:1"></div></div>
+      <div class="bar lys"></div>
+      <div class="bar lys" style="width:80%"></div>
+      <div class="knap"></div>
+    </div>
+  </div>
+
+  <div class="cell channel-cell">
+    <div class="kanal-top"><b>Tilmelding og velkomstmail</b></div>
+    <span class="tag on">DTU</span>
+    <div class="wf">
+      <div class="felt"></div>
+      <div class="felt"></div>
+      <div class="felt" style="width:60%"></div>
+      <div class="knap" style="width:100%"></div>
+    </div>
+  </div>
+</div>
+
+<div class="raekke">
+  <div class="rowlabel">CTA<span class="sub">Næste skridt</span></div>
+
+  <div class="cell cta-cell"><div class="cta-btn">Læs artiklen</div></div>
+  <div class="cell cta-cell"><div class="cta-btn">Se kurser om vindenergi</div></div>
+  <div class="cell cta-cell"><div class="cta-btn">Gå til kurset</div></div>
+  <div class="cell cta-cell"><div class="cta-btn">Se indhold og skema</div></div>
+  <div class="cell cta-cell"><div class="cta-btn soft">Sammenlign kurser</div></div>
+  <div class="cell cta-cell"><div class="cta-btn soft">Stil et fagligt spørgsmål</div></div>
+  <div class="cell cta-cell"><div class="cta-btn soft">Send til din chef</div></div>
+  <div class="cell cta-cell"><div class="cta-btn">Tilmeld kurset</div></div>
+</div>
+</div>
+
+<div class="foot-row">
+<div class="legend">
+  <div class="item"><span class="tag dtu">DTU</span> sider DTU ejer</div>
+  <div class="item"><span class="tag off">OFFSITE</span> kanaler DTU ikke ejer</div>
+  <div class="item"><span class="swatch"></span> CTA der forpligter</div>
+  <div class="item"><span class="swatch dashed"></span> blødt trin før købet</div>
+  <div class="item"><span class="knæk-tag">KNÆK</span> hvor rejsen knækker i dag</div>
+</div>
+<footer>Bare en skitse fra Claude · Hypotese til workshop 1.10, ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF<span class="kilde">iO Bonzai</span></footer>
+</div>
 </div>
 </div></div>
 
 <div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeModal()">
-  <div class="modal">
+  <div class="modal" id="modalBox">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-head">
       <h2 id="modalTitle"></h2>
@@ -1050,7 +1366,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-title">Ledelse på DTU Learn for Life</div>
         <div class="m-copy">DTU forener ledelsesfaglighed med et teknisk-videnskabeligt fagmiljø. Uddannelsen retter sig mod dig, der skal lede fagfolk, ingeniører eller andre specialister. Du kan starte med et enkelt modul og udvide i dit eget tempo.</div>
         <div class="m-factbox">
-          <div><b>Næste modulstart</b>[dato]</div>
+          <div><b>Næste modulstart</b>3. november 2026</div>
           <div><b>Pris</b>Fra 11.800 kr./modul</div>
           <div><b>Fuldt omfang</b>60 ECTS, deltid</div>
         </div>
@@ -1103,7 +1419,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-title">Informationsmøde: Diplom i ledelse</div>
         <div class="m-copy">Et gratis onlinemøde for dig, der overvejer uddannelsen. En studievejleder gennemgår opbygning, adgangskrav og finansiering, og du får mulighed for at stille spørgsmål.</div>
         <div class="m-calrow">
-          <div class="m-calday">Man</div><div class="m-calday active">Tirs<br>[dato]</div><div class="m-calday">Ons</div><div class="m-calday">Tors</div>
+          <div class="m-calday">Man</div><div class="m-calday active">Tirs<br>27/10</div><div class="m-calday">Ons</div><div class="m-calday">Tors</div>
         </div>
         <div class="m-faq-q">Kan min arbejdsgiver betale?</div>
         <div class="m-sub">Ja. De fleste arbejdsgivere finansierer modulerne, og I kan søge SVU i fællesskab.</div>
@@ -1201,7 +1517,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     variants: [
       { label: "Velkomstmail", url: "mail · fra: DTU Learn for Life", html: `
         <div class="m-title">Velkommen på Fra specialist til leder</div>
-        <div class="m-copy">Du er tilmeldt modulet, der starter [dato]. Sådan er du klar til dag 1:</div>
+        <div class="m-copy">Du er tilmeldt modulet, der starter 3. november 2026. Sådan er du klar til dag 1:</div>
         <div class="m-faq-q">1. Aktiver din adgang til DTU Learn</div>
         <div class="m-sub">Din adgang er åben nu, så du kan gennemgå materialet i god tid.</div>
         <div class="m-faq-q">2. Læs de to korte tekster i litteraturlisten</div>
@@ -1216,7 +1532,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-title">Tak for din tilmelding</div>
         <div class="m-factbox">
           <div><b>Modul</b>Fra specialist til leder</div>
-          <div><b>Start</b>[dato]</div>
+          <div><b>Start</b>3. november 2026</div>
           <div><b>Kvittering</b>Sendt til din mail</div>
         </div>
         <div class="m-copy">Du hører fra os inden studiestart. Du kan til enhver tid tilmelde dig et nyt modul, når du er klar til det.</div>
@@ -1228,20 +1544,95 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     title: "Temaside om vindenergi",
     desc: "Fanger emnesøgninger · trin 01, Søger på emnet",
     variants: [
-      { label: "Temaside", url: "lifelonglearning.dtu.dk/vindenergi", html: `
-        <div class="m-title">Vindenergi</div>
-        <div class="m-copy">Fra havvind til nettilslutning: byggeklodserne til den grønne omstilling, og vejene ind i dem, uanset om du vil have et enkelt kursus eller en hel uddannelse.</div>
-        <div class="m-faq-q">Et emne, mange veje ind</div>
-        <div class="m-sub">Et kort forløb på et par dage, en hel master over flere år eller en gratis masterclass, hvis du bare vil starte med at kigge.</div>
-        <div class="m-factbox">
-          <div><b>Master of Wind Energy</b>60 ECTS, deltid</div>
-          <div><b>Enkeltkurser</b>Fra 5 ECTS, kan tages løbende</div>
-          <div><b>Gratis masterclass</b>Online, ingen forpligtelse</div>
+      { label: "Temaside", url: "lifelonglearning.dtu.dk/vindenergi", wide: true, html: `
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Tema-side · vindenergi · DTU Wind</div>
+            <div class="wf-h1">Vindenergi: fra et enkelt kursus til Master of Wind Energy</div>
+            <div class="wf-p lede">DTU Wind er et af verdens førende forskningsmiljøer i vindenergi. Er vindenergi lige kommet ind i dine projekter, eller vil du specialisere dig i det? Her er de veje ind i emnet, som findes hos DTU i dag, fra et enkelt kursus til hele masteren.</div>
+            <div class="wf-stat">
+              <div><b>9</b><span>Enkeltkurser</span></div>
+              <div><b>60</b><span>ECTS i masteren</span></div>
+              <div><b>10 t/uge</b><span>Pr. kursus, 13 uger</span></div>
+              <div><b>15.000 kr.</b><span>Pr. enkeltkursus</span></div>
+            </div>
+            <span class="wf-btn solid">Se gratis masterclass om vindenergi</span> <span class="wf-btn">Se alle 9 kurser</span>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Populære enkeltkurser lige nu</div>
+            <div class="wf-grid3">
+              <div class="wf-card fill">
+                <div class="wf-lbl">Master, deltid, 2-6 år</div>
+                <div class="wf-card-t">Master of Wind Energy</div>
+                <div class="wf-card-m">60 ECTS · 9 kurser à 5 ECTS + afgangsprojekt (15 ECTS) · online, engelsk · 173.000 kr. for hele masteren</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-lbl">Enkeltfag · forår</div>
+                <div class="wf-card-t">Grid Connection and Integration of Wind Power</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · det elektrotekniske i at koble vindanlæg på nettet</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-lbl">Enkeltfag · forår</div>
+                <div class="wf-card-t">Offshore Wind Farm Planning</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · planlægning og placering af havvindmølleparker</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-lbl">Enkeltfag · efterår</div>
+                <div class="wf-card-t">Offshore Wind Energy: Design of Substructures</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · fundamenter og understrukturer til havvindmøller</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-lbl">Enkeltfag · forår</div>
+                <div class="wf-card-t">Wind Energy in Society</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · planlægning, miljøvurdering og lokal accept af vindprojekter</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-lbl">Enkeltfag · efterår</div>
+                <div class="wf-card-t">Wind Turbine Technology</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · grundlæggende om vindmøllens opbygning og funktion</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Video-case</div>
+            <div class="wf-vid">▶ 2:40</div>
+            <div class="wf-card-t">"Jeg startede med et enkelt kursus, ikke en hel master"</div>
+            <div class="wf-card-m">Rådgivende ingeniør, tog Grid Connection and Integration of Wind Power som enkeltfag ved siden af sit job, inden hun besluttede sig for resten.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Hvad andre siger om vejen ind</div>
+            <div class="wf-quote-row">
+              <div class="wf-quote">"Jeg vidste ikke, om jeg skulle vælge det tekniske eller det samfundsrettede spor. Kurset i planlægning gav mig svaret."<div class="wf-quote-who">Wind Energy in Society, enkeltfag</div></div>
+              <div class="wf-quote">"Min chef betalte for et enkelt kursus. Nu er vi ved at tale om resten af masteren."<div class="wf-quote-who">Offshore Wind Farm Planning, enkeltfag</div></div>
+              <div class="wf-quote">"Ti timer om ugen ved siden af jobbet er til at få øje på, hvis man planlægger det."<div class="wf-quote-who">Master of Wind Energy, studerende</div></div>
+            </div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-lbl">Kommende event</div>
+            <div class="wf-card-t">Webinar: AI, quantum, resilience and European technological sovereignty</div>
+            <div class="wf-card-m">21. oktober, kl. 17.00-18.00, online, gratis, ingen tilmelding til uddannelse påkrævet</div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Ofte stillede spørgsmål</div>
+            <div class="wf-faq-row">
+              <div class="wf-faq-q">Skal jeg tage hele masteren for at starte?</div>
+              <div class="wf-faq-a">Nej. Du kan tage enkeltkurser løbende, betale per kursus og først beslutte dig for hele masteren senere.</div>
+            </div>
+            <div class="wf-faq-row">
+              <div class="wf-faq-q">Hvad kræver det at komme ind?</div>
+              <div class="wf-faq-a">En bachelorgrad og mindst to års relevant erhvervserfaring, uanset om du tager et enkeltfag eller hele masteren.</div>
+            </div>
+            <div class="wf-faq-row">
+              <div class="wf-faq-q">Hvor meget tid skal jeg afsætte?</div>
+              <div class="wf-faq-a">Cirka 10 timer om ugen per kursus, over 13 uger. Videoer, opgaver, diskussionsfora og valgfrie live-webinarer.</div>
+            </div>
+            <div class="wf-faq-row">
+              <div class="wf-faq-q">Kan min arbejdsgiver betale?</div>
+              <div class="wf-faq-a">Ja, der findes en sponsorguide, du kan give til din chef, uanset om det er et enkelt kursus eller hele masteren.</div>
+            </div>
+          </div>
+          <div class="wf-foot"><span>lifelonglearning.dtu.dk/vindenergi</span><span>learnforlife@dtu.dk</span></div>
         </div>
-        <div class="m-faq-q">En ingeniør, der har gjort det</div>
-        <div class="m-sub">Se casen om en specialist, der fandt sin vej ind i vindenergi via enkeltkurser, uden en plan fra start.</div>
-        <div class="m-btn">Se den gratis masterclass</div>
-        <div class="m-btn outline">Se casen</div>
       `},
       { label: "Google-søgning", url: "google.dk · \"vindenergi kursus\"", html: `
         <div class="m-title">Google: vindenergi kursus</div>
@@ -1260,16 +1651,19 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
       { label: "LinkedIn-annonce", url: "sponsoreret opslag", html: `
         <div class="li-post">
           <div class="li-head">
-            <div class="li-avatar"></div>
-            <div>
-              <div class="li-who"><b>DTU Learn for Life</b></div>
+            <div class="li-avatar"><img src="./mockup-assets/dtu-logo.png" alt="DTU logo"></div>
+            <div class="li-who">
+              <b>DTU Learn for Life</b>
               <div class="li-headline">Sponsoreret</div>
             </div>
+            <button class="li-more">···</button>
           </div>
           <div class="li-text">Stadig nysgerrig på vindenergi? Se, hvordan andre ingeniører har bygget videre på deres faglighed med kurser hos DTU, uden at binde sig til en hel uddannelse fra start.</div>
-          <div class="li-image"></div>
+          <div class="li-image">
+            <span class="li-image-label">Billede: vindmøllepark [indsæt rigtigt foto]</span>
+          </div>
           <div class="li-actionbar">
-            <div class="li-action">Se vindenergi hos DTU</div>
+            <div class="li-action"><span class="li-icon">↗</span>Se vindenergi hos DTU</div>
           </div>
         </div>
       `}
@@ -1282,24 +1676,43 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
       { label: "LinkedIn-opslag", url: "linkedin.com/company/dtu", html: `
         <div class="li-post">
           <div class="li-head">
-            <div class="li-avatar"></div>
-            <div>
-              <div class="li-who"><b>DTU Learn for Life <span class="li-follow">+ Følg</span></b></div>
+            <div class="li-avatar"><img src="./mockup-assets/dtu-logo.png" alt="DTU logo"></div>
+            <div class="li-who">
+              <b>DTU Learn for Life <span class="li-follow">+ Følg</span></b>
               <div class="li-headline">1K følgere</div>
               <div class="li-meta">3d · 🌐</div>
             </div>
+            <button class="li-more">···</button>
           </div>
-          <div class="li-text">Da vindenergi kom på dagsordenen hos hendes arbejdsgiver, var Anna allerede ingeniør, men manglede den specifikke faglighed.<br><br>Hun startede med et enkelt kursus i havvindmølleparker. I dag arbejder hun med nettilslutning af offshore-anlæg, og hun er i gang med sit tredje kursus mod en hel master.<br><br>"Jeg vidste ikke, at man kunne starte i det små," siger Anna.<br><br>Se, hvad DTU har inden for vindenergi: <span class="li-link">lnkd.in/dtu-vind</span><br><br><span class="li-hashtag">#dtu</span> <span class="li-hashtag">#vindenergi</span> <span class="li-seemore">...se mere</span></div>
-          <div class="li-quote">
-            <div class="li-quote-mark">"</div>
-            <div class="li-quote-text">Jeg vidste ikke, at man kunne starte i det små</div>
-            <div class="li-quote-who">Anna, ingeniør, nettilslutning af offshore-vindanlæg</div>
+          <div class="li-text">Da vindenergi kom på dagsordenen hos hendes arbejdsgiver, var Anna allerede ingeniør, men manglede den specifikke faglighed.
+
+Hun startede med et enkelt kursus i havvindmølleparker. I dag arbejder hun med nettilslutning af offshore-anlæg, og hun er i gang med sit tredje kursus mod en hel master.
+
+"Jeg vidste ikke, at man kunne starte i det små," siger Anna.
+
+Se, hvad DTU har inden for vindenergi: <span class="li-link">lnkd.in/dtu-vind</span>
+
+<span class="li-hashtag">#dtu</span> <span class="li-hashtag">#vindenergi</span> <span class="li-seemore">...se mere</span></div>
+          <div class="li-image">
+            <span class="li-image-label">Billede: Anna, portræt på anlægget [indsæt rigtigt foto]</span>
+            <div class="li-quote">
+              <span class="li-quote-mark">"</span>
+              <div class="li-quote-text">Jeg vidste ikke, at man kunne starte i det små</div>
+              <div class="li-quote-who">Anna<br>Ingeniør, nettilslutning af offshore-vindanlæg</div>
+            </div>
           </div>
-          <div class="li-stats"><span class="li-reacts">👍❤️ 142</span><span>18 kommentarer</span></div>
+          <div class="li-stats">
+            <div class="li-reacts">
+              <div class="li-react-icons"><span>👍</span><span>❤</span><span>👏</span></div>
+              <span>142</span>
+            </div>
+            <div>18 kommentarer · 6 delinger</div>
+          </div>
           <div class="li-actionbar">
-            <div class="li-action">Synes godt om</div>
-            <div class="li-action">Kommenter</div>
-            <div class="li-action">Del</div>
+            <div class="li-action"><span class="li-icon">👍</span>Synes godt om</div>
+            <div class="li-action"><span class="li-icon">💬</span>Kommenter</div>
+            <div class="li-action"><span class="li-icon">↗</span>Del</div>
+            <div class="li-action"><span class="li-icon">➤</span>Send</div>
           </div>
         </div>
       `}
@@ -1310,16 +1723,36 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     desc: "Uddyber casen · trin 04, Ser casen på sitet",
     variants: [
       { label: "Case-side", url: "lifelonglearning.dtu.dk/vindenergi/anna", html: `
-        <div class="m-title">Anna fandt sin vej ind i vindenergi, ét kursus ad gangen</div>
-        <div class="m-copy">Anna var ingeniør uden erfaring med vindenergi, da hendes arbejdsgiver satte fokus på området. I dag arbejder hun med nettilslutning af offshore-vindanlæg.</div>
-        <div class="m-faq-q">Video: Annas vej fra første kursus til nyt fagområde</div>
-        <div class="m-sub">4 min. Se, hvordan hun greb det an, og hvad hun ville gøre anderledes.</div>
-        <div class="m-faq-q">Podcast: Vindenergi, fra faglighed til karriere</div>
-        <div class="m-sub">22 min. Anna og to kolleger taler om, hvordan man kommer ind i et nyt fagområde uden at starte forfra.</div>
-        <div class="m-hr"></div>
-        <div class="m-copy">Nysgerrig på at prøve det af, uden at forpligte dig? Start med en gratis masterclass.</div>
-        <div class="m-btn">Se den gratis masterclass</div>
-      `}
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Case · DTU Wind</div>
+            <div class="wf-h1">Anna fandt sin vej ind i vindenergi, ét kursus ad gangen</div>
+            <div class="wf-p lede">Anna var ingeniør uden erfaring med vindenergi, da hendes arbejdsgiver satte fokus på området. I dag arbejder hun med nettilslutning af offshore-vindanlæg og er i gang med sit tredje kursus mod en hel master.</div>
+            <div class="wf-stat">
+              <div><b>2022</b><span>Startede med første kursus</span></div>
+              <div><b>3</b><span>Kurser gennemført</span></div>
+              <div><b>0</b><span>Binding til hele masteren</span></div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Video</div>
+            <div class="wf-vid">Annas vej fra første kursus til nyt fagområde · 4 min</div>
+            <div class="wf-p">Anna fortæller, hvordan hun greb det an, hvorfor hun startede med et enkelt kursus i stedet for at søge om hele masteren, og hvad hun ville gøre anderledes i dag.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Podcast</div>
+            <div class="wf-quote-row">
+              <div class="wf-quote">"Jeg vidste ikke, at man kunne starte i det små. Jeg troede, det var alt eller intet."<div class="wf-quote-who">Anna, ingeniør, nettilslutning af offshore-vindanlæg</div></div>
+              <div class="wf-quote">"Det første kursus var et lavt risiko-skridt. Jeg kunne altid stoppe, hvis det ikke gav noget."<div class="wf-quote-who">Anna, om Grid Connection and Integration of Wind Power</div></div>
+            </div>
+            <div class="wf-p">Vindenergi, fra faglighed til karriere · 22 min. Anna og to kolleger taler om, hvordan man kommer ind i et nyt fagområde uden at starte forfra.</div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-p">Nysgerrig på at prøve det af, uden at forpligte dig?</div>
+            <div class="wf-btn solid">Se den gratis masterclass</div>
+          </div>
+        </div>
+      `, wide: true}
     ]
   },
   {
@@ -1332,7 +1765,7 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-factbox">
           <div><b>Format</b>Online, 90 minutter</div>
           <div><b>Pris</b>Gratis</div>
-          <div><b>Næste dato</b>[dato]</div>
+          <div><b>Næste dato</b>12. november 2026</div>
         </div>
         <div class="m-faq-q">Du får svar på</div>
         <div class="m-sub">Hvad driver udviklingen inden for havvind og nettilslutning lige nu, og hvordan hænger de tekniske discipliner sammen.</div>
@@ -1374,23 +1807,44 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
     desc: "Fire kurser, tydeligt første skridt · trin 07, Finder et forløb",
     variants: [
       { label: "Forløbsside", url: "lifelonglearning.dtu.dk/vindenergi/forloeb", html: `
-        <div class="m-title">Fra enkeltkurser til fagperson i vindenergi</div>
-        <div class="m-copy">Fire online-kurser, der samlet giver dig en solid faglig base inden for vindenergi. Du tager dem i dit eget tempo, og du kan stoppe efter hvert kursus.</div>
-        <div class="m-factbox">
-          <div><b>Kurser</b>4 stk., online</div>
-          <div><b>Samlet pris</b>ca. 60.000 kr.</div>
-          <div><b>Varighed</b>Op til 2 år</div>
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Anbefalet forløb · DTU Wind</div>
+            <div class="wf-h1">Fra enkeltkurser til fagperson i vindenergi</div>
+            <div class="wf-p lede">Fire online-kurser, der samlet giver dig en solid faglig base inden for vindenergi. Du tager dem i dit eget tempo, og du kan stoppe efter hvert kursus, uden at binde dig til en hel master.</div>
+            <div class="wf-stat">
+              <div><b>4</b><span>Kurser, 5 ECTS hver</span></div>
+              <div><b>ca. 60.000</b><span>kr. samlet</span></div>
+              <div><b>Op til 2 år</b><span>i dit eget tempo</span></div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Rækkefølge</div>
+            <div class="wf-grid2">
+              <div class="wf-card fill">
+                <div class="wf-card-t">1. Wind Turbine Technology</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · grundlaget for resten af forløbet: vindmøllens komponenter, aerodynamik og drift</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-t">2. Grid Connection and Integration of Wind Power</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · kræver ikke, at du har taget kursus 1 først. Fokus på nettilslutning af vindanlæg</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-t">3. Offshore Wind Farm Planning</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · vælges senere. Planlægning og layout af havvindmølleparker</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-t">4. Wind Energy in Society</div>
+                <div class="wf-card-m">5 ECTS · 15.000 kr. · 13 uger, online · vælges senere. Vindenergiens rolle i den grønne omstilling</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-p">Vil du høre, hvordan andre har fået det finansieret af deres arbejdsgiver?</div>
+            <div class="wf-btn solid">Tilmeld dig et informationsmøde</div>
+          </div>
         </div>
-        <div class="m-faq-q">1. Havvindmølleparker</div>
-        <div class="m-sub">5 ECTS. Grundlaget for resten af forløbet.</div>
-        <div class="m-faq-q">2. Nettilslutning af vindanlæg</div>
-        <div class="m-sub">5 ECTS. Kræver ikke, at du har taget kursus 1 først.</div>
-        <div class="m-faq-q">3. og 4. Vælges senere</div>
-        <div class="m-sub">Du binder dig ikke til de sidste to kurser nu.</div>
-        <div class="m-hr"></div>
-        <div class="m-sub">Vil du høre, hvordan andre har fået det finansieret af deres arbejdsgiver?</div>
-        <div class="m-btn outline">Tilmeld dig et informationsmøde</div>
-      `}
+      `, wide: true}
     ]
   },
   {
@@ -1450,6 +1904,189 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
         <div class="m-btn">Send ansøgning</div>
       `}
     ]
+  },
+  {
+    title: "Fagligt indhold om vindenergi",
+    desc: "Viser, at DTU har kurser · trin 01, Behovet opstår",
+    variants: [
+      { label: "Artikel", url: "lifelonglearning.dtu.dk/artikler/nettilslutning", html: `
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Fagartikel · DTU Wind</div>
+            <div class="wf-h1">Nettilslutning af offshore-vindanlæg: de tre største udfordringer</div>
+            <div class="wf-p lede">En kort gennemgang af, hvad der gør nettilslutning teknisk kompleks, skrevet til rådgivende ingeniører, der møder emnet i deres projekter.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-faq-row"><div class="wf-faq-q">1. Spændingsstabilitet ved lange kabelforbindelser</div><div class="wf-faq-a">Hvorfor det bliver en større udfordring, når man flytter møllerne længere fra kysten.</div></div>
+            <div class="wf-faq-row"><div class="wf-faq-q">2. Reaktiv effekt og kompensation</div><div class="wf-faq-a">Hvordan man dimensionerer anlægget, så det kan levere det, nettet kræver.</div></div>
+            <div class="wf-faq-row"><div class="wf-faq-q">3. Integration af flere anlæg på samme netpunkt</div><div class="wf-faq-a">Hvad der sker, når flere parker skal dele samme tilslutningspunkt, og hvordan man planlægger for det.</div></div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-p">DTU har et enkeltfag, hvor emnet gennemgås i dybden: Grid Connection and Integration of Wind Power, 5 ECTS.</div>
+            <div class="wf-btn solid">Se kurset</div>
+          </div>
+        </div>
+      `, wide: true}
+    ]
+  },
+  {
+    title: "Emneside om vindenergi til rådgivere",
+    desc: "Google og AI-svar kan citere den · trin 02, Googler emnet",
+    variants: [
+      { label: "Emneside", url: "lifelonglearning.dtu.dk/vindenergi", html: `
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Emneside · DTU Wind</div>
+            <div class="wf-h1">Vindenergi til rådgivende ingeniører</div>
+            <div class="wf-p lede">Havvindmølleparker, nettilslutning og netintegration: de emner, rådgivere oftest møder, når vindenergi kommer ind i deres projekter, samlet med de enkeltfag hos DTU, der bygger videre på det.</div>
+            <div class="wf-stat">
+              <div><b>5 ECTS</b><span>pr. enkeltfag</span></div>
+              <div><b>13 uger</b><span>online</span></div>
+              <div><b>Fra 15.000 kr.</b><span>pr. fag</span></div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Hvad passer til hvad</div>
+            <div class="wf-grid2">
+              <div class="wf-card fill">
+                <div class="wf-card-t">Grid Connection and Integration of Wind Power</div>
+                <div class="wf-card-m">5 ECTS · Online, 13 uger · det elektrotekniske: nettilslutning, spændingsstabilitet og netintegration</div>
+              </div>
+              <div class="wf-card">
+                <div class="wf-card-t">Offshore Wind Farm Planning</div>
+                <div class="wf-card-m">5 ECTS · Online, 13 uger · grundlaget: layout og planlægning af havvindmølleparker</div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-btn solid">Se kurser om vindenergi</div>
+          </div>
+        </div>
+      `, wide: true}
+    ]
+  },
+  {
+    title: "Annonce i fagfolks ord",
+    desc: "Ikke kun kursets titel · trin 03, Ser en annonce",
+    variants: [
+      { label: "Google-annonce", url: "google.dk · søgeannonce", html: `
+        <div class="m-title">Google-annonce</div>
+        <div class="m-sub">Annonce · lifelonglearning.dtu.dk/enkeltfag/grid-connection</div>
+        <div class="m-faq-q">Grid Connection and Integration of Wind Power, 5 ECTS hos DTU</div>
+        <div class="m-copy">For rådgivere, der arbejder med havvindmølleparker og skal forstå nettilslutning og netintegration. Online, 13 uger, næste start februar 2027.</div>
+      `}
+    ]
+  },
+  {
+    title: "Niveau i ord",
+    desc: "Hvem det passer til · trin 04, Vurderer kurset",
+    variants: [
+      { label: "Kursusside", url: "lifelonglearning.dtu.dk/enkeltfag/grid-connection", wide: true, html: `
+        <div class="wf-page">
+          <div class="wf-hero">
+            <div class="wf-lbl">Enkeltfag · DTU Wind · 5 ECTS</div>
+            <div class="wf-h1">Grid Connection and Integration of Wind Power</div>
+            <div class="wf-p lede">Kurset fokuserer på nettilslutning af vindkraftanlæg samt de udfordringer og løsninger, der er forbundet med netintegration: opsamlingssystemer, spændings- og frekvensregulering, grid codes og power quality.</div>
+            <div class="wf-stat">
+              <div><b>5</b><span>ECTS</span></div>
+              <div><b>13 uger</b><span>Online</span></div>
+              <div><b>15.000 kr.</b><span>EU-borgere</span></div>
+              <div><b>Feb 2027</b><span>Næste start</span></div>
+            </div>
+            <span class="wf-btn solid">Se indhold og skema</span> <span class="wf-btn">Skriv til kursuslederen</span>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Hvem det passer til</div>
+            <div class="wf-p">Rådgivende ingeniører og andre med en bachelor- eller ingeniørgrad og mindst to års relevant erhvervserfaring, der arbejder med eller omkring vindenergi. Gode engelskkundskaber er nødvendige, kurset undervises på engelsk.</div>
+            <div class="wf-lbl">Hvad du bør kunne i forvejen</div>
+            <div class="wf-p">Matematik og programmering på bachelorniveau anbefales. Kurset bruger MATLAB som primært værktøj.</div>
+            <div class="wf-lbl">Hvad du kan bagefter</div>
+            <div class="wf-p">Designe elektriske opsamlingssystemer, beregne tab, analysere spændingsprofiler og vurdere, hvordan et vindkraftanlægs kontrolstruktur påvirker power quality og frekvensregulering.</div>
+          </div>
+          <div class="wf-sec tight">
+            <div class="wf-lbl">Format</div>
+            <div class="wf-p">13 moduler med videoforelæsninger, øvelser, quizzer og læsemateriale, plus ugentlige live spørgetimer. Afsluttes med en online eksamen.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="wf-lbl">Spørgsmål om kurset</div>
+            <div class="wf-p">Kursusansvarlig Anca Daniela Hansen, anca@dtu.dk. Skriv, hvis du er i tvivl om niveau eller indhold.</div>
+          </div>
+          <div class="wf-foot"><span>lifelonglearning.dtu.dk/enkeltfag/grid-connection</span><span>learnforlife@dtu.dk</span></div>
+        </div>
+      `}
+    ]
+  },
+  {
+    title: "Sammenligning af beslægtede kurser",
+    desc: "Format, niveau og tid side om side · trin 05, Kan det passe med jobbet?",
+    variants: [
+      { label: "Sammenligning", url: "lifelonglearning.dtu.dk/enkeltfag/relaterede", html: `
+        <div class="m-title">Beslægtede kurser i vindenergi</div>
+        <div class="m-factbox">
+          <div><b>Grid Connection and Integration of Wind Power</b>Online, 13 uger, forår, 5 ECTS</div>
+          <div><b>Offshore Wind Farm Planning</b>Online, 13 uger, forår, 5 ECTS</div>
+          <div><b>Wind Turbine Technology</b>Online, 13 uger, efterår, 5 ECTS</div>
+        </div>
+        <div class="m-copy">Alle tre er enkeltfag på 5 ECTS og kan tages hver for sig. Grid Connection kræver ikke, at man har taget de andre først, men bygger godt videre på grundlæggende elektroteknik.</div>
+        <div class="m-btn outline">Sammenlign kurser</div>
+      `}
+    ]
+  },
+  {
+    title: "Kontaktformular til kursuslederen",
+    desc: "Fagligt spørgsmål til Anca Daniela Hansen · trin 06, Spørger en fagperson",
+    variants: [
+      { label: "Kontaktformular", url: "lifelonglearning.dtu.dk/enkeltfag/grid-connection/kontakt", html: `
+        <div class="m-title">Stil et fagligt spørgsmål</div>
+        <div class="m-copy">Skriv direkte til kursusansvarlig Anca Daniela Hansen, hvis du er i tvivl om niveau, indhold eller om kurset passer til dit arbejde med nettilslutning.</div>
+        <div class="m-faq-q">Dit spørgsmål</div>
+        <div class="m-sub">Fx: "Kræver kurset, at jeg allerede kan MATLAB, eller lærer man det undervejs?"</div>
+        <div class="m-hr"></div>
+        <div class="m-sub">Vi svarer inden for to arbejdsdage. Dit spørgsmål gemmes, så vi kan følge op.</div>
+        <div class="m-btn">Send spørgsmål</div>
+      `}
+    ]
+  },
+  {
+    title: "Kort materiale til chefen",
+    desc: "Udbytte, pris og tidsforbrug · trin 07, Får chefens ja",
+    variants: [
+      { label: "Vedhæftning: kort oplæg", url: "PDF · Oplaeg_grid_connection.pdf", html: `
+        <div class="doc-page">
+          <img class="doc-logo" src="./mockup-assets/dtu-logo.png" alt="DTU logo">
+          <div class="doc-kicker">DTU Learn for Life · Til godkendelse hos leder</div>
+          <div class="doc-title">Kursus: Grid Connection and Integration of Wind Power</div>
+          <div class="doc-sub">Kort oplæg til godkendelse af et enkeltfag hos DTU Wind.</div>
+          <div class="doc-h">Udbytte for virksomheden</div>
+          <div class="doc-p">Kompetence til at designe elektriske opsamlingssystemer og vurdere nettilslutning af offshore-vindanlæg, direkte anvendelig i igangværende projekter.</div>
+          <div class="doc-factgrid">
+            <div><b>ECTS</b><span>5</span></div>
+            <div><b>Pris</b><span>15.000 kr. (EU)</span></div>
+            <div><b>Tidsforbrug</b><span>13 uger, online</span></div>
+            <div><b>Næste start</b><span>Februar 2027</span></div>
+          </div>
+          <div class="doc-footer"><span>DTU Learn for Life</span><span>lifelonglearning.dtu.dk</span></div>
+        </div>
+      `}
+    ]
+  },
+  {
+    title: "Hvad sker der nu",
+    desc: "Tilmelding er ikke optagelse · trin 08, Tilmelder sig og venter",
+    variants: [
+      { label: "Velkomstmail", url: "mail · fra: DTU Learn for Life", html: `
+        <div class="m-title">Din tilmelding til Grid Connection and Integration of Wind Power</div>
+        <div class="m-copy">Du er tilmeldt, men ikke optaget endnu. Sådan foregår det herfra:</div>
+        <div class="m-faq-q">1. Vi tjekker adgangskrav</div>
+        <div class="m-sub">Kræver en bachelor- eller ingeniørgrad og mindst to års relevant erhvervserfaring. Du hører fra os, hvis vi mangler noget fra dig.</div>
+        <div class="m-faq-q">2. Ledige pladser fordeles</div>
+        <div class="m-sub">Kurset har et begrænset antal pladser.</div>
+        <div class="m-faq-q">3. Du får svar ugen før studiestart</div>
+        <div class="m-sub">Kursusstart februar 2027. Faktura sendes efter kursusstart, ikke ved tilmelding.</div>
+        <div class="m-hr"></div>
+        <div class="m-btn outline">Se andre kurser om vindenergi</div>
+      `}
+    ]
   }
 ];
 
@@ -1461,6 +2098,7 @@ function renderVariant(){
   const v = d.variants[currentVariant];
   document.getElementById('modalUrl').textContent = v.url;
   document.getElementById('modalBody').innerHTML = v.html;
+  document.getElementById('modalBox').classList.toggle('wide', !!v.wide);
   document.querySelectorAll('.variant-tab').forEach((el,idx)=>{
     el.classList.toggle('active', idx===currentVariant);
   });
