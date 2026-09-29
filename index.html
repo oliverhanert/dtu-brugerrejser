@@ -3,97 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <title>DTU LFL — Brugerrejse: Diplom i ledelse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --bg:#fafaf8; --card:#ffffff; --ink:#161616; --sub:#767676;
-  --line:#e3e1d8; --line-soft:#ecebe3; --accent:#161616; --knæk:#b3261e; --knæk-bg:#fdecea;
-  --dtu-bg:#161616; --dtu-fg:#ffffff; --off-bg:#eeeeea; --off-fg:#5b5b5b;
-  --phase-line:#d9d7cb; --row-bg:#f4f3ec;
-  --shadow:0 1px 2px rgba(20,20,15,0.04), 0 6px 16px rgba(20,20,15,0.05);
-  --shadow-hover:0 4px 10px rgba(20,20,15,0.07), 0 14px 30px rgba(20,20,15,0.10);
+  --bg:#e9e9e7; --papir:#ffffff; --card:#f6f6f5; --ink:#262624; --sub:#74746f;
+  --line:#b9b9b5; --line-soft:#dcdcd9; --accent:#262624; --knæk:#262624; --knæk-bg:transparent;
+  --dtu-bg:#262624; --dtu-fg:#ffffff; --off-bg:transparent; --off-fg:#74746f;
+  --phase-line:#b9b9b5; --row-bg:#d9d9d6; --fyld:#e4e4e1;
+  --shadow:none;
+  --shadow-hover:0 2px 0 var(--line-soft);
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 *{box-sizing:border-box;}
+html, body{height:100%;}
 body{
   margin:0; background:var(--bg); color:var(--ink);
-  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  padding:28px;
-  font-size:13px;
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased;
+  background-image: radial-gradient(#d2d2cf 1.2px, transparent 1.3px);
+  background-size: 22px 22px;
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  padding-inline:16px;
 }
-.wrap{max-width:1720px; margin:0 auto;}
+.ramme{position:relative; width:100%; flex:1; min-height:0;}
+.slide{
+  position:absolute; left:50%; top:50%; width:1920px; height:1080px;
+  transform:translate(-50%,-50%) scale(var(--s,.5)); transform-origin:center center;
+  background:var(--papir); border:1.5px solid var(--line); box-shadow:0 2px 0 var(--line-soft);
+  padding:44px 56px 36px; display:grid; grid-template-rows:auto auto 1fr; gap:14px; min-height:0;
+}
 header{
-  display:flex; justify-content:space-between; align-items:flex-start;
-  gap:20px; margin-bottom:6px; flex-wrap:wrap;
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:20px; flex-wrap:wrap;
 }
 .title-block .kicker{
-  font-size:0.7rem; letter-spacing:0.09em; color:var(--sub); font-weight:700;
+  font:500 14px var(--mono); letter-spacing:0.08em; color:var(--sub); font-weight:500;
   text-transform:uppercase;
 }
-h1{font-size:1.7rem; margin:5px 0 0; font-weight:700; letter-spacing:-0.01em;}
+h1{font-size:46px; margin:8px 0 0; font-weight:600; letter-spacing:-0.01em;}
 .persona{
-  display:flex; gap:12px; align-items:flex-start;
-  border:1px solid var(--line); border-radius:14px; padding:12px 16px;
-  max-width:430px; background:var(--card); box-shadow:var(--shadow);
+  display:flex; gap:16px; align-items:center;
+  border:1.5px dashed var(--line); border-radius:10px; padding:12px 18px;
+  max-width:620px; background:transparent; box-shadow:none;
 }
 .avatar{
-  width:40px; height:40px; border-radius:50%;
-  background:linear-gradient(140deg,#e9e7dd,#d9d6c8);
-  flex-shrink:0; display:flex; align-items:center; justify-content:center;
-  font-size:1rem; color:#8f8d80;
+  width:58px; height:58px; border-radius:50%; border:1.5px solid var(--line);
+  background:var(--card); flex-shrink:0; position:relative; overflow:hidden;
 }
-.persona h3{margin:0 0 3px; font-size:0.85rem; font-weight:700;}
-.persona p{margin:0; font-size:0.75rem; color:var(--sub); line-height:1.45;}
+.avatar::before{
+  content:""; position:absolute; left:50%; top:13px; width:20px; height:20px;
+  margin-left:-10px; border-radius:50%; background:var(--line-soft);
+}
+.avatar::after{
+  content:""; position:absolute; left:50%; top:36px; width:40px; height:30px;
+  margin-left:-20px; border-radius:50%; background:var(--line-soft);
+}
+.persona h3{margin:0 0 4px; font-size:16px; font-weight:600;}
+.persona p{margin:0; font-size:14px; color:var(--sub); line-height:1.45;}
 
 .phasebar{
-  display:grid; grid-template-columns: 170px repeat(8, minmax(150px,1fr));
-  margin-top:26px;
+  display:grid; grid-template-columns: 150px repeat(8, 1fr); column-gap:14px;
 }
 .phase-group{
-  font-size:0.68rem; letter-spacing:0.09em; text-transform:uppercase;
-  color:var(--sub); font-weight:700; border-bottom:2px solid var(--phase-line);
-  padding-bottom:7px; margin-bottom:2px;
+  font:500 12.5px var(--mono); letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--sub); border-bottom:1.5px solid var(--phase-line);
+  padding-bottom:7px; margin-bottom:2px; position:relative;
 }
 .phase-group.span2{grid-column:span 2;}
 .phase-group.span3{grid-column:span 3;}
-.phase-group .arrow{float:right; opacity:0.5;}
-
-.grid{
-  display:grid;
-  grid-template-columns: 170px repeat(8, minmax(150px,1fr));
-  gap:10px;
-  margin-top:6px;
+.phase-group::after{
+  content:""; position:absolute; right:0; bottom:-5px; width:7px; height:7px;
+  border-right:1.5px solid var(--line); border-top:1.5px solid var(--line); transform:rotate(45deg);
 }
+
+.rows{display:grid; grid-template-rows:1.05fr 1fr 1.15fr .52fr; row-gap:14px; min-height:0;}
+.raekke{
+  display:grid;
+  grid-template-columns: 150px repeat(8, 1fr);
+  column-gap:14px;
+  align-items:stretch;
+}
+.raekke.ai-row{background:var(--row-bg); margin-inline:-56px; padding:12px 56px; position:relative;}
 .rowlabel{
   display:flex; flex-direction:column; justify-content:center;
-  font-size:0.78rem; font-weight:700; color:var(--ink);
-  padding:8px 6px 8px 0;
+  font-size:19px; font-weight:600; color:var(--ink);
+  gap:4px;
 }
-.rowlabel .sub{font-size:0.68rem; font-weight:400; color:var(--sub); margin-top:2px;}
+.rowlabel .sub{font-size:13px; font-weight:400; color:var(--sub); margin-top:0;}
 
 .cell{
-  background:var(--card); border:1px solid var(--line); border-radius:12px;
-  padding:12px; min-height:70px; position:relative; box-shadow:var(--shadow);
-  transition:box-shadow .18s, transform .18s;
+  background:var(--card); border:1.5px solid var(--line); border-radius:6px;
+  padding:12px 13px; min-height:0; position:relative; box-shadow:none;
+  transition:box-shadow .18s, transform .18s; min-width:0;
 }
-.step-n{font-size:0.65rem; color:var(--sub); font-weight:700; margin-bottom:4px; letter-spacing:0.04em;}
-.step-title{font-size:0.83rem; font-weight:700; margin:0 0 4px;}
-.step-quote{font-size:0.76rem; color:var(--sub); font-style:italic; line-height:1.4;}
+.step-n{font:500 12px var(--mono); color:var(--sub); margin-bottom:2px; letter-spacing:0.02em;}
+.step-title{font-size:17px; font-weight:600; margin:0;}
+.step-quote{font-size:14.5px; color:var(--sub); font-style:italic; line-height:1.4;}
+.cell.knæk{border-style:dashed;}
 .knæk-tag{
-  display:inline-block; margin-top:9px; font-size:0.62rem; font-weight:700;
-  color:var(--knæk); background:var(--knæk-bg); border:1px solid #f3c9c5;
-  border-radius:6px; padding:2px 7px; letter-spacing:0.03em;
+  display:inline-block; margin-top:auto; align-self:flex-start; font:500 11px var(--mono); text-transform:uppercase;
+  color:var(--ink); background:transparent; border:1.2px solid var(--ink);
+  border-radius:3px; padding:1px 5px; letter-spacing:0.06em;
+}
+.raekke > .cell{display:flex; flex-direction:column; gap:6px;}
+.raekke.journey-row > .cell:not(:last-child)::after{
+  content:"→"; position:absolute; right:-14px; top:50%; transform:translate(50%,-50%);
+  font-size:16px; color:var(--sub); background:var(--papir); line-height:1; padding:2px 0; z-index:1;
 }
 
-.content-cell{cursor:pointer; background:var(--row-bg);}
-.content-cell:hover{box-shadow:var(--shadow-hover); transform:translateY(-2px); border-color:#cfccbd;}
-.content-cell .c-title{font-size:0.83rem; font-weight:700; margin:0 0 4px;}
-.content-cell .c-desc{font-size:0.74rem; color:var(--sub); line-height:1.42;}
-.content-cell .ai-tag{
-  margin-top:9px; background:#161616; color:#7CFC9A; font-family:"SF Mono",Menlo,monospace;
-  font-size:0.62rem; border-radius:6px; padding:5px 7px; line-height:1.4;
+.ai-row.rowlabel{gap:6px;}
+.ai-row .ai-tag{
+  align-self:flex-start; margin-top:6px; background:var(--ink); color:var(--papir); font-family:var(--mono);
+  font-size:11.5px; letter-spacing:0.04em; border-radius:12px; padding:4px 10px; line-height:1.3; display:inline-block;
 }
+
+.content-cell{cursor:pointer; background:var(--papir); margin-inline:0;}
+.content-cell:hover{box-shadow:var(--shadow-hover); transform:translateY(-2px); border-color:var(--ink);}
+.content-cell .c-title{font-size:15.5px; font-weight:600; margin:0;}
+.content-cell .c-desc{font-size:13.5px; color:var(--sub); line-height:1.4;}
+.content-cell .lines{margin-top:auto; display:grid; gap:5px;}
+.content-cell .lines i{height:6px; border-radius:3px; background:var(--line-soft); display:block;}
+.content-cell .lines i:nth-child(2){width:82%;}
+.content-cell .lines i:nth-child(3){width:58%;}
 .content-cell .open-hint{
-  margin-top:7px; font-size:0.66rem; color:#8a8a80; font-weight:600;
+  margin-top:auto; font-size:12px; color:var(--sub); font-weight:600;
 }
 .content-cell .open-hint::after{content:" →"; transition:margin .15s;}
 .content-cell:hover .open-hint::after{margin-left:3px;}
@@ -187,63 +222,129 @@ h1{font-size:1.7rem; margin:5px 0 0; font-weight:700; letter-spacing:-0.01em;}
   padding:11px 24px 18px; font-size:0.68rem; color:#8a8a80; border-top:1px solid var(--line);
 }
 
+.li-post{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:#000000e6;}
+.li-head{display:flex; gap:8px; align-items:flex-start;}
+.li-head .li-avatar{
+  width:48px; height:48px; border-radius:8px; flex-shrink:0;
+  background:#fff; border:1px solid #e9e5df; display:flex; align-items:center; justify-content:center;
+  padding:6px; overflow:hidden;
+}
+.li-head .li-avatar img{width:100%; height:100%; object-fit:contain;}
+.li-head .li-who{flex:1; min-width:0;}
+.li-head .li-who b{font-size:0.86rem; font-weight:700; display:block; line-height:1.3;}
+.li-head .li-who .li-headline{font-size:0.74rem; color:#00000099; line-height:1.35; margin-top:1px;}
+.li-head .li-meta{font-size:0.68rem; color:#00000099; margin-top:2px; display:flex; align-items:center; gap:4px;}
+.li-follow{color:#0a66c2; font-weight:700; font-size:0.76rem; margin-left:6px; cursor:default;}
+.li-more{border:none; background:none; color:#00000099; font-size:1.1rem; padding:0 4px; line-height:1;}
+.li-text{font-size:0.83rem; line-height:1.5; margin-top:10px; white-space:pre-wrap;}
+.li-text .li-seemore{color:#00000099; font-weight:600;}
+.li-hashtag{color:#0a66c2; font-weight:600;}
+.li-image{
+  margin-top:10px; border-top:3px solid #990000; overflow:hidden; border-left:1px solid #e9e5df;
+  border-right:1px solid #e9e5df; border-bottom:1px solid #e9e5df;
+  background:repeating-linear-gradient(45deg, #eef2f6 0 8px, #e2e8ee 8px 16px);
+  height:280px; position:relative; color:#9aa7b4; font-size:0.7rem;
+}
+.li-image .li-image-label{
+  position:absolute; top:10px; left:10px; background:#fff; border:1px solid #e9e5df;
+  border-radius:5px; padding:2px 7px; font-size:0.62rem; color:#9aa7b4;
+}
+.li-image .li-quote{
+  position:absolute; left:16px; bottom:16px; right:16px;
+}
+.li-image .li-quote .li-quote-mark{color:#990000; font-size:2.2rem; font-weight:900; line-height:0.6; display:block;}
+.li-image .li-quote .li-quote-text{
+  color:#0a2a5e; font-weight:700; font-size:1.02rem; line-height:1.3; margin-top:4px;
+}
+.li-image .li-quote .li-quote-who{color:#3d3d3d; font-size:0.74rem; margin-top:8px; line-height:1.4;}
+.li-stats{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 0 7px; font-size:0.7rem; color:#00000099; border-bottom:1px solid #e9e5df;
+}
+.li-reacts{display:flex; align-items:center; gap:4px;}
+.li-reacts .li-react-icons{display:flex;}
+.li-reacts .li-react-icons span{
+  width:16px; height:16px; border-radius:50%; border:1.5px solid #fff;
+  display:inline-flex; align-items:center; justify-content:center; font-size:0.6rem;
+  margin-left:-4px; color:#fff;
+}
+.li-reacts .li-react-icons span:first-child{margin-left:0; background:#0a66c2;}
+.li-reacts .li-react-icons span:nth-child(2){background:#7a2ee6;}
+.li-reacts .li-react-icons span:nth-child(3){background:#e06344;}
+.li-actionbar{display:flex; padding-top:2px;}
+.li-action{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:9px 0 3px; color:#00000099; font-size:0.68rem; font-weight:600;
+}
+.li-action .li-icon{font-size:0.95rem;}
+
+.doc-page{
+  background:#fff; border:1px solid var(--line); border-radius:2px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08); padding:26px 24px; font-size:0.78rem;
+}
+.doc-page .doc-logo{width:34px; margin-bottom:14px; display:block;}
+.doc-page .doc-kicker{font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--sub); font-weight:700;}
+.doc-page .doc-title{font-size:1rem; font-weight:700; margin:4px 0 12px; color:#0a2a5e;}
+.doc-page .doc-sub{color:var(--sub); font-size:0.76rem; margin-bottom:16px; line-height:1.5;}
+.doc-page .doc-factgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px 18px; margin:16px 0; padding:14px; background:#f7f7f2; border-radius:8px;}
+.doc-page .doc-factgrid div b{display:block; font-size:0.64rem; text-transform:uppercase; letter-spacing:0.03em; color:var(--sub); font-weight:700; margin-bottom:2px;}
+.doc-page .doc-factgrid div span{font-size:0.82rem; font-weight:600;}
+.doc-page .doc-h{font-weight:700; font-size:0.82rem; margin:16px 0 5px;}
+.doc-page .doc-p{color:#3d3d3d; line-height:1.55; font-size:0.78rem;}
+.doc-page .doc-quote{border-left:3px solid #990000; padding-left:12px; margin:16px 0; font-style:italic; color:#0a2a5e; font-size:0.82rem; line-height:1.45;}
+.doc-page .doc-footer{margin-top:20px; padding-top:12px; border-top:1px solid var(--line); font-size:0.66rem; color:var(--sub); display:flex; justify-content:space-between;}
+
 .tag{
-  display:inline-block; font-size:0.6rem; font-weight:700; letter-spacing:0.05em;
-  border-radius:5px; padding:2px 7px; margin-bottom:7px;
+  display:inline-block; font:500 10.5px var(--mono); text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--sub); border:1.2px solid var(--line); border-radius:3px; padding:1px 5px; white-space:nowrap;
 }
-.tag.dtu{background:var(--dtu-bg); color:var(--dtu-fg);}
-.tag.off{background:var(--off-bg); color:var(--off-fg);}
+.tag.on, .tag.dtu{background:var(--ink); color:var(--papir); border-color:var(--ink);}
+.tag.off{background:transparent; color:var(--sub); border-color:var(--line);}
 
-.channel-cell{padding-bottom:14px;}
-.wf{margin-top:9px; display:flex; flex-direction:column; gap:7px;}
-.wf-box{
-  border:1.3px solid #d3d1c5; border-radius:8px; background:#fbfbf8;
-  display:flex; align-items:center; justify-content:center;
-  color:#c3c1b7; font-size:1.1rem; position:relative; overflow:hidden;
-}
-.wf-box.x::before, .wf-box.x::after{
-  content:""; position:absolute; width:145%; height:1.3px; background:#d3d1c5;
-  top:50%; left:50%;
-}
-.wf-box.x::before{transform:translate(-50%,-50%) rotate(45deg);}
-.wf-box.x::after{transform:translate(-50%,-50%) rotate(-45deg);}
-.wf-h-lg{height:38px;}
-.wf-h-md{height:26px;}
-.wf-h-sm{height:16px;}
-.wf-line{height:7px; border-radius:4px; background:#e2e0d3;}
-.wf-line.w60{width:60%;}
-.wf-line.w80{width:80%;}
-.wf-line.w40{width:40%;}
-.wf-line.w100{width:100%;}
-.wf-row{display:flex; gap:6px;}
-.wf-row .wf-box{flex:1;}
-.wf-dot{width:16px; height:16px; border-radius:50%; border:1.3px solid #d3d1c5; background:#fbfbf8; flex-shrink:0;}
-.wf-btn{border:1.3px solid #b7b4a5; border-radius:12px; height:18px; width:60px; background:#f3f2e9;}
-.wf-cal{display:flex; gap:4px; margin-top:2px;}
-.wf-cal-col{flex:1; height:36px; border-radius:6px; background:#f6f5ee; border:1.3px solid #d3d1c5;}
-.wf-cal-col.active{background:#b7b4a5; border-color:#b7b4a5;}
-.wf-field{border:1.3px solid #d3d1c5; border-radius:6px; height:18px; background:#fbfbf8;}
+.channel-cell{padding:10px 11px 11px;}
+.channel-cell .kanal-top{display:flex; justify-content:space-between; align-items:baseline; gap:6px;}
+.channel-cell .kanal-top b{font-size:15px;}
+.channel-cell .tag{align-self:flex-start;}
 
-.cta-cell{display:flex; align-items:center; justify-content:center; min-height:50px;}
+.wf{flex:1; min-height:0; border:1.2px solid var(--line); border-radius:4px; background:var(--card);
+  padding:7px; display:flex; flex-direction:column; gap:5px; overflow:hidden;}
+.wf .bar{height:7px; border-radius:3px; background:var(--line-soft); flex-shrink:0;}
+.wf .bar.lys{background:var(--fyld);}
+.wf .x{flex:1; min-height:22px; border:1.2px solid var(--line); border-radius:3px; position:relative;
+  background:linear-gradient(to top right, transparent calc(50% - .6px), var(--line) 50%, transparent calc(50% + .6px)),
+              linear-gradient(to top left, transparent calc(50% - .6px), var(--line) 50%, transparent calc(50% + .6px));}
+.wf .knap{height:13px; width:46%; border-radius:3px; background:var(--sub);}
+.wf .raek{display:flex; gap:5px; align-items:center;}
+.wf .prik{width:16px; height:16px; border-radius:50%; background:var(--line-soft); flex:none;}
+.wf .felt{height:14px; border:1.2px solid var(--line); border-radius:3px; background:var(--papir);}
+.wf .kal{display:grid; grid-template-columns:repeat(7,1fr); gap:3px; flex:1;}
+.wf .kal i{background:var(--papir); border:1px solid var(--line-soft); border-radius:2px;}
+.wf .kal i.v{background:var(--sub); border-color:var(--sub);}
+.wf .kort3{display:grid; grid-template-columns:repeat(3,1fr); gap:4px; flex:1;}
+.wf .kort3 i{border:1.2px solid var(--line); border-radius:3px; background:var(--papir);}
+.wf .soeg{height:15px; border:1.2px solid var(--line); border-radius:8px; background:var(--papir);}
+.wf .ai{border-left:3px solid var(--sub); padding-left:5px; display:grid; gap:4px;}
+
+.cta-cell{background:var(--papir); display:flex; align-items:center; justify-content:center; padding:10px;}
 .cta-btn{
-  border:1.5px solid var(--ink); border-radius:20px; padding:7px 12px;
-  font-size:0.74rem; font-weight:600; text-align:center; width:100%;
+  border:1.8px solid var(--ink); border-radius:5px; padding:8px 12px;
+  font-size:14.5px; font-weight:600; text-align:center; line-height:1.2; width:100%;
 }
-.cta-btn.soft{border-style:dashed; color:var(--sub); border-color:var(--sub);}
+.cta-btn.soft{border-style:dashed; font-weight:500;}
 
 .legend{
-  display:flex; gap:20px; flex-wrap:wrap; margin-top:20px; padding-top:14px;
-  border-top:1px solid var(--line); font-size:0.7rem; color:var(--sub);
-  align-items:center;
+  display:flex; gap:26px; flex-wrap:wrap; align-items:center; font-size:13.5px; color:var(--sub);
 }
 .legend .item{display:flex; align-items:center; gap:6px;}
 .legend .tag{margin-bottom:0;}
-.legend .swatch{width:14px; height:14px; border-radius:4px; border:1px solid var(--ink); display:inline-block;}
+.legend .swatch{width:26px; height:16px; border-radius:3px; border:1.5px solid var(--ink); display:inline-block;}
 .legend .swatch.dashed{border-style:dashed;}
 .legend .knæk-tag{margin-top:0;}
-footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
+footer{display:flex; gap:26px; align-items:center; font-size:13.5px; color:var(--sub);}
+footer .kilde{margin-left:auto; font-family:var(--mono); font-size:12px;}
+.foot-row{display:flex; flex-direction:column; gap:10px; padding-top:8px; border-top:1px solid var(--line);}
 
-.journey-tabs{display:flex; gap:8px; margin-top:0; margin-bottom:20px; border-bottom:1px solid var(--line); padding-bottom:0;}
+.journey-tabs{display:flex; gap:8px; margin-bottom:10px; border-bottom:1px solid var(--line); padding-bottom:0; flex-shrink:0;}
 .journey-tab{
   border:none; background:none; color:var(--sub); font-size:0.82rem; font-weight:700;
   padding:9px 4px 11px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px;
@@ -251,20 +352,16 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
 }
 .journey-tab:hover{color:var(--ink);}
 .journey-tab.active{color:var(--ink); border-color:var(--ink);}
-.journey-panel{display:none;}
-.journey-panel.active{display:block;}
+.journey-panel{display:none; height:100%;}
+.journey-panel.active{display:grid; grid-template-rows:auto 1fr auto; gap:18px; min-height:0;}
 .journey-empty{
   border:1px dashed var(--line); border-radius:14px; padding:60px 24px;
   text-align:center; color:var(--sub); font-size:0.85rem; margin-top:22px; background:var(--card);
 }
-
-@media (max-width: 1100px){
-  .grid, .phasebar{grid-template-columns: 130px repeat(8, minmax(200px,1fr));}
-}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="ramme"><div class="slide" id="slide">
 <div class="journey-tabs" id="journeyTabs">
   <button class="journey-tab active" onclick="selectJourney(0)">1. Hans — Diplom i ledelse</button>
   <button class="journey-tab" onclick="selectJourney(1)">2. Brugerrejse 2</button>
@@ -277,7 +374,7 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
     <h1>Fra "det kunne være noget" til første modul</h1>
   </div>
   <div class="persona">
-    <div class="avatar">👤</div>
+    <div class="avatar"></div>
     <div>
       <h3>Hans, fagekspert på vej mod sin første lederstilling</h3>
       <p>Har aftalt med chefen at blive leder. En ven og chefen har begge taget en diplom i ledelse. Ved ikke, hvor han skal starte.</p>
@@ -295,7 +392,8 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
   <div class="phase-group span3">Beslutning</div>
 </div>
 
-<div class="grid">
+<div class="rows">
+<div class="raekke journey-row">
   <div class="rowlabel">Brugerrejse<span class="sub">Hvad Hans gør og tænker</span></div>
 
   <div class="cell">
@@ -313,19 +411,19 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
     <div class="step-title">Djøf peger på DTU</div>
     <div class="step-quote">"Et universitet. Det virker mere solidt end en professionshøjskole."</div>
   </div>
-  <div class="cell">
+  <div class="cell knæk">
     <div class="step-n">04</div>
     <div class="step-title">Lander hos DTU</div>
     <div class="step-quote">"Hvorfor lige DTU? Hvornår kan jeg starte, og hvad koster det?"</div>
     <span class="knæk-tag">KNÆK</span>
   </div>
-  <div class="cell">
+  <div class="cell knæk">
     <div class="step-n">05</div>
     <div class="step-title">Vurderer</div>
     <div class="step-quote">"Hvad har andre fået ud af det?"</div>
     <span class="knæk-tag">KNÆK</span>
   </div>
-  <div class="cell">
+  <div class="cell knæk">
     <div class="step-n">06</div>
     <div class="step-title">Vil tale med nogen</div>
     <div class="step-quote">"Jeg vil afklare, om det passer til min situation, før jeg beslutter mig."</div>
@@ -341,173 +439,151 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
     <div class="step-title">Tilmelder sig</div>
     <div class="step-quote">"Jeg starter med modul et i februar."</div>
   </div>
+</div>
 
-  <div class="rowlabel">Content<span class="sub">Hvad der skal ligge klar</span></div>
+<div class="raekke ai-row">
+  <div class="rowlabel">Content<span class="sub">Hvad der skal ligge klar</span><div class="ai-tag">Genereres med AI<br>i iO Bonzai</div></div>
 
   <div class="cell content-cell" onclick="openModal(0)">
     <div class="c-title">Historier fra tidligere studerende</div>
     <div class="c-desc">Fra fagekspert til leder, fortalt af en DTU-alumne</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(1)">
     <div class="c-title">Guide til diplom i ledelse</div>
     <div class="c-desc">Forklarer uddannelsen, så Google og AI-svar kan citere den</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(2)">
     <div class="c-title">Partner- og profiltekster</div>
     <div class="c-desc">Samme budskab hos Djøf og på finduddannelse.dk</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(3)">
     <div class="c-title">Hvorfor DTU, pris og næste start</div>
     <div class="c-desc">Øverst på siden, før modullisten</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(4)">
     <div class="c-title">Cases og modulbeskrivelser</div>
     <div class="c-desc">Studerende fortæller, moduler i hverdagssprog</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(5)">
     <div class="c-title">Invitation og FAQ</div>
     <div class="c-desc">Informationsmøde, svar på de ti mest stillede spørgsmål</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(6)">
     <div class="c-title">Pakke til chefen</div>
     <div class="c-desc">Pris, finansiering (SVU), tidsforbrug og udbytte for virksomheden</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
   <div class="cell content-cell" onclick="openModal(7)">
     <div class="c-title">Bekræftelse og velkomst</div>
     <div class="c-desc">Hvad sker der nu, hvad skal du læse først</div>
-    <div class="ai-tag">Genereres med AI<br>i iO Bonzai</div>
+    <div class="lines"><i></i><i></i><i></i></div>
     <div class="open-hint">Se udkast</div>
   </div>
+</div>
 
+<div class="raekke">
   <div class="rowlabel">Kanal / sidetype<span class="sub">Hvor Hans møder det</span></div>
 
   <div class="cell channel-cell">
-    <span class="tag off">OFFSITE</span>
-    <div class="step-title" style="font-size:0.8rem;">LinkedIn og arbejdspladsen</div>
+    <div class="kanal-top"><b>LinkedIn og arbejdspladsen</b></div>
+    <span class="tag off">Offsite</span>
     <div class="wf">
-      <div class="wf-row" style="align-items:center;">
-        <div class="wf-dot"></div>
-        <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
-          <div class="wf-line w40"></div>
-          <div class="wf-line w40" style="height:4px;"></div>
-        </div>
-      </div>
-      <div class="wf-box x wf-h-lg"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w60"></div>
+      <div class="raek"><span class="prik"></span><div class="bar" style="flex:1"></div></div>
+      <div class="x"></div>
+      <div class="bar lys"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag off">OFFSITE</span>
-    <div class="step-title" style="font-size:0.8rem;">Google og AI-svar</div>
+    <div class="kanal-top"><b>Google og AI-svar</b></div>
+    <span class="tag off">Offsite</span>
     <div class="wf">
-      <div class="wf-field" style="height:20px;"></div>
-      <div class="wf-box wf-h-sm" style="background:#f0efe6; justify-content:flex-start; padding-left:6px; font-size:0.55rem; color:#a09e94;">AI Overview</div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w40"></div>
+      <div class="soeg"></div>
+      <div class="ai"><div class="bar"></div><div class="bar lys"></div><div class="bar lys" style="width:70%"></div></div>
+      <div class="bar" style="width:60%"></div>
+      <div class="bar lys"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag off">OFFSITE</span>
-    <div class="step-title" style="font-size:0.8rem;">Djøf og finduddannelse.dk</div>
+    <div class="kanal-top"><b>Djøf og finduddannelse.dk</b></div>
+    <span class="tag off">Offsite</span>
     <div class="wf">
-      <div class="wf-line w80" style="height:8px;"></div>
-      <div class="wf-box x wf-h-md"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w60"></div>
+      <div class="raek"><div class="bar" style="width:30%"></div><div class="bar lys" style="flex:1"></div></div>
+      <div class="x"></div>
+      <div class="bar lys"></div>
+      <div class="knap"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag dtu">DTU</span>
-    <div class="step-title" style="font-size:0.8rem;">Uddannelsesside</div>
+    <div class="kanal-top"><b>Uddannelsesside</b></div>
+    <span class="tag on">DTU</span>
     <div class="wf">
-      <div class="wf-box x wf-h-md"></div>
-      <div class="wf-line w80" style="height:8px;"></div>
-      <div class="wf-row">
-        <div class="wf-box wf-h-sm"></div>
-        <div class="wf-box wf-h-sm"></div>
-        <div class="wf-box wf-h-sm"></div>
-      </div>
-      <div class="wf-btn"></div>
+      <div class="x"></div>
+      <div class="raek"><div class="felt" style="flex:1"></div><div class="felt" style="flex:1"></div><div class="felt" style="flex:1"></div></div>
+      <div class="knap"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag dtu">DTU</span>
-    <div class="step-title" style="font-size:0.8rem;">Modulside og cases</div>
+    <div class="kanal-top"><b>Modulside og cases</b></div>
+    <span class="tag on">DTU</span>
     <div class="wf">
-      <div class="wf-row">
-        <div class="wf-box x wf-h-md" style="flex:1.3;"></div>
-        <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
-          <div class="wf-line w100" style="height:5px;"></div>
-          <div class="wf-line w60" style="height:5px;"></div>
-          <div class="wf-line w80" style="height:5px;"></div>
-        </div>
-      </div>
-      <div class="wf-btn"></div>
+      <div class="bar" style="width:55%"></div>
+      <div class="kort3"><i></i><i></i><i></i></div>
+      <div class="bar lys"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag dtu">DTU</span>
-    <div class="step-title" style="font-size:0.8rem;">Event og booking</div>
+    <div class="kanal-top"><b>Event og booking</b></div>
+    <span class="tag on">DTU</span>
     <div class="wf">
-      <div class="wf-line w60" style="height:8px;"></div>
-      <div class="wf-cal">
-        <div class="wf-cal-col"></div>
-        <div class="wf-cal-col active"></div>
-        <div class="wf-cal-col"></div>
-        <div class="wf-cal-col"></div>
-      </div>
-      <div class="wf-btn" style="border-style:dashed;"></div>
+      <div class="bar" style="width:50%"></div>
+      <div class="kal"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="v"></i><i></i><i></i><i></i><i></i></div>
+      <div class="knap"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag dtu">DTU</span>
-    <div class="step-title" style="font-size:0.8rem;">Email</div>
+    <div class="kanal-top"><b>Email</b></div>
+    <span class="tag on">DTU</span>
     <div class="wf">
-      <div class="wf-row" style="align-items:center;">
-        <div class="wf-dot" style="width:10px;height:10px;"></div>
-        <div class="wf-line w80" style="height:4px;"></div>
-      </div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w40"></div>
-      <div class="wf-btn"></div>
+      <div class="raek"><span class="prik"></span><div class="bar" style="flex:1"></div></div>
+      <div class="bar lys"></div>
+      <div class="bar lys" style="width:80%"></div>
+      <div class="felt"></div>
+      <div class="knap"></div>
     </div>
   </div>
 
   <div class="cell channel-cell">
-    <span class="tag dtu">DTU</span>
-    <div class="step-title" style="font-size:0.8rem;">Køb og velkomstmail</div>
+    <div class="kanal-top"><b>Køb og velkomstmail</b></div>
+    <span class="tag on">DTU</span>
     <div class="wf">
-      <div class="wf-box wf-h-sm" style="background:#f0efe6;"></div>
-      <div class="wf-line w100"></div>
-      <div class="wf-line w80"></div>
-      <div class="wf-btn"></div>
+      <div class="felt"></div>
+      <div class="felt"></div>
+      <div class="felt" style="width:60%"></div>
+      <div class="knap" style="width:100%"></div>
     </div>
   </div>
+</div>
 
+<div class="raekke">
   <div class="rowlabel">CTA<span class="sub">Næste skridt</span></div>
 
   <div class="cell cta-cell"><div class="cta-btn">Læs historien</div></div>
@@ -519,7 +595,9 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
   <div class="cell cta-cell"><div class="cta-btn">Send til din chef</div></div>
   <div class="cell cta-cell"><div class="cta-btn">Køb modul 1</div></div>
 </div>
+</div>
 
+<div class="foot-row">
 <div class="legend">
   <div class="item"><span class="tag dtu">DTU</span> sider DTU ejer</div>
   <div class="item"><span class="tag off">OFFSITE</span> kanaler DTU ikke ejer</div>
@@ -527,8 +605,8 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
   <div class="item"><span class="swatch dashed"></span> blødt trin før købet</div>
   <div class="item"><span class="knæk-tag">KNÆK</span> hvor rejsen knækker i dag</div>
 </div>
-
-<footer>Bare en skitse fra Claude · Hypotese til workshop 1.10 — ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF</footer>
+<footer>Bare en skitse fra Claude · Hypotese til workshop 1.10 — ikke valideret med brugere · lokal HTML-fil, del som vedhæftet fil eller eksporteret billede/PDF<span class="kilde">iO Bonzai</span></footer>
+</div>
 </div>
 
 <div class="journey-panel" id="journeyPanel1">
@@ -537,7 +615,7 @@ footer{margin-top:8px; color:var(--sub); font-size:0.75rem; text-align:right;}
 <div class="journey-panel" id="journeyPanel2">
   <div class="journey-empty">Brugerrejse 3 er endnu ikke beskrevet.</div>
 </div>
-</div>
+</div></div>
 
 <div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeModal()">
   <div class="modal">
@@ -566,31 +644,95 @@ const DRAFTS = [
     title: "Historier fra tidligere studerende",
     desc: "LinkedIn og arbejdspladsen · trin 01, Ideen opstår",
     variants: [
-      { label: "Alumne-historie", url: "linkedin.com/company/dtu", html: `
-        <div class="m-avatarrow">
-          <div class="dot-lg"></div>
-          <div class="who"><b>DTU Learn for Life</b><span>Sponsoreret</span></div>
-        </div>
-        <div class="m-copy">Fra ingeniør til leder af ingeniører.
+      { label: "Alumne-historie", url: "linkedin.com/feed", html: `
+        <div class="li-post">
+          <div class="li-head">
+            <div class="li-avatar"><img src="./mockup-assets/dtu-logo.png" alt="DTU logo"></div>
+            <div class="li-who">
+              <b>DTU - Technical University of Denmark <span class="li-follow">+ Følg</span></b>
+              <div class="li-headline">247.195 følgere</div>
+              <div class="li-meta">2d · 🌐</div>
+            </div>
+            <button class="li-more">···</button>
+          </div>
+          <div class="li-text">For to år siden stod Peter Holm med en teknisk titel og et team, han lige havde fået ansvar for. I dag er han projektleder.
 
-Peter Holm arbejdede i 12 år som specialist i vindenergibranchen, før han blev projektleder for sit tidligere team. Han startede med et enkelt modul på DTU — ikke en hel uddannelse.</div>
-        <div class="m-imgph">Billede: Peter Holm, projektleder</div>
-        <div class="m-quote">"Den tekniske del af jobbet kunne jeg. Det, jeg skulle lære, var at give retning til mennesker, jeg lige havde stået side om side med."</div>
-        <div class="m-cite">Læs, hvordan modulet Fra specialist til leder rustede Peter til rollen — og hvorfor han valgte at starte i det små.</div>
-        <div class="m-btn outline">Læs Peters historie</div>
+"Jeg havde 12 år som specialist i vindenergibranchen bag mig, da min chef spurgte, om jeg ville tage over for min gamle teamleder. Den faglige del var jeg tryg ved. Det, jeg ikke havde prøvet, var at give retning til folk, jeg lige havde stået side om side med ved samme skrivebord."
+
+Peter startede ikke med en hel uddannelse. Han tilmeldte sig ét modul: Fra specialist til leder, 5 ECTS, tre sammenhængende dage.
+
+"Jeg ville teste, om det gav noget, før jeg forpligtede mig til mere. Det gjorde det. Jeg fik konkrete redskaber til de samtaler, jeg gik og var usikker på — ikke teori for teoriens skyld."
+
+Han er nu i gang med modul to af diplomuddannelsen i ledelse, som han tager i sit eget tempo, ved siden af jobbet.
+
+Kender du en fagperson, der står, hvor Peter stod? Modulet ligger på DTU's temaside om ledelse. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#lederudvikling</span> <span class="li-hashtag">#diplomuddannelse</span> <span class="li-seemore">...se mere</span></div>
+          <div class="li-image">
+            <span class="li-image-label">Billede: Peter Holm, portræt på kontoret [indsæt rigtigt foto]</span>
+            <div class="li-quote">
+              <span class="li-quote-mark">"</span>
+              <div class="li-quote-text">Jeg skulle lære at give retning til folk, jeg lige havde stået side om side med</div>
+              <div class="li-quote-who">Peter Holm<br>Projektleder, tidl. specialist i vindenergibranchen</div>
+            </div>
+          </div>
+          <div class="li-stats">
+            <div class="li-reacts">
+              <div class="li-react-icons"><span>👍</span><span>❤</span><span>👏</span></div>
+              <span>212</span>
+            </div>
+            <div>18 kommentarer · 9 delinger</div>
+          </div>
+          <div class="li-actionbar">
+            <div class="li-action"><span class="li-icon">👍</span>Synes godt om</div>
+            <div class="li-action"><span class="li-icon">💬</span>Kommenter</div>
+            <div class="li-action"><span class="li-icon">↗</span>Del</div>
+            <div class="li-action"><span class="li-icon">➤</span>Send</div>
+          </div>
+        </div>
       `},
-      { label: "Leder-perspektiv", url: "linkedin.com/company/dtu", html: `
-        <div class="m-avatarrow">
-          <div class="dot-lg"></div>
-          <div class="who"><b>DTU Learn for Life</b><span>Sponsoreret</span></div>
-        </div>
-        <div class="m-copy">Hvordan afgør man, om en medarbejder er klar til ledelse?
+      { label: "Leder-perspektiv", url: "linkedin.com/feed", html: `
+        <div class="li-post">
+          <div class="li-head">
+            <div class="li-avatar"><img src="./mockup-assets/dtu-logo.png" alt="DTU logo"></div>
+            <div class="li-who">
+              <b>DTU - Technical University of Denmark <span class="li-follow">+ Følg</span></b>
+              <div class="li-headline">247.195 følgere</div>
+              <div class="li-meta">5d · 🌐</div>
+            </div>
+            <button class="li-more">···</button>
+          </div>
+          <div class="li-text">Hvordan ved man, om en medarbejder er klar til at blive leder — uden at gætte?
 
-Mette Aabo, afdelingschef, sendte sin nye teamleder på ét diplommodul, inden de besluttede resten af uddannelsen sammen.</div>
-        <div class="m-imgph">Billede: Mette Aabo, afdelingschef</div>
-        <div class="m-quote">"Vi ville se, om det gav værdi, før vi forpligtede os til en hel uddannelse. Det gjorde det — og nu fortsætter han."</div>
-        <div class="m-cite">Sådan bruger flere virksomheder DTU's enkeltmoduler som et første, afgrænset skridt.</div>
-        <div class="m-btn outline">Læs Mettes historie</div>
+Mette Aabo, afdelingschef, stod med præcis det spørgsmål, da en af hendes stærkeste specialister skulle rykke op og lede sit gamle team.
+
+"Vi talte om det i lang tid, men jeg ville ikke bare sende ham på en hel uddannelse uden at vide, om det gav mening for ham. Så vi startede med et enkelt modul hos DTU: Fra specialist til leder. Tre dage, en klar pris, ingen binding til resten."
+
+Modulet blev en fælles øvelse. Efter de tre dage havde både Mette og hendes medarbejder et bedre grundlag for at beslutte, om resten af diplomuddannelsen gav mening.
+
+"Vi ville se, om det gav værdi, før vi forpligtede os til en hel uddannelse. Det gjorde det — og nu er han i gang med modul to, mens vi løbende følger, om det passer med resten af hans udvikling."
+
+Er du selv chef for en fagperson, der er på vej mod sin første lederrolle? Modulet er en lav-risiko måde at starte samtalen. <span class="li-hashtag">#dtu</span> <span class="li-hashtag">#ledelse</span> <span class="li-hashtag">#kompetenceudvikling</span> <span class="li-seemore">...se mere</span></div>
+          <div class="li-image">
+            <span class="li-image-label">Billede: Mette Aabo, portræt i mødelokale [indsæt rigtigt foto]</span>
+            <div class="li-quote">
+              <span class="li-quote-mark">"</span>
+              <div class="li-quote-text">Vi ville se, om det gav værdi, før vi forpligtede os til en hel uddannelse</div>
+              <div class="li-quote-who">Mette Aabo<br>Afdelingschef</div>
+            </div>
+          </div>
+          <div class="li-stats">
+            <div class="li-reacts">
+              <div class="li-react-icons"><span>👍</span><span>❤</span><span>👏</span></div>
+              <span>147</span>
+            </div>
+            <div>11 kommentarer · 6 delinger</div>
+          </div>
+          <div class="li-actionbar">
+            <div class="li-action"><span class="li-icon">👍</span>Synes godt om</div>
+            <div class="li-action"><span class="li-icon">💬</span>Kommenter</div>
+            <div class="li-action"><span class="li-icon">↗</span>Del</div>
+            <div class="li-action"><span class="li-icon">➤</span>Send</div>
+          </div>
+        </div>
       `}
     ]
   },
@@ -722,36 +864,70 @@ Passer bedst til dig, der leder tekniske specialister og selv har en faglig bagg
   },
   {
     title: "Pakke til chefen",
-    desc: "Email · trin 07, Afklarer med chefen",
+    desc: "Email og materiale · trin 07, Afklarer med chefen",
     variants: [
-      { label: "Materiale til lederen", url: "mail · fra: DTU Learn for Life", html: `
+      { label: "E-mail", url: "mail · fra: DTU Learn for Life", html: `
         <div class="m-avatarrow">
           <div class="dot-lg" style="width:22px;height:22px;"></div>
-          <div class="who"><b>Klar til at tage med til din leder</b><span>Ét ark, til print eller videresendelse</span></div>
+          <div class="who"><b>Klar til at tage med til din leder</b><span>Vedhæftet: ét ark, til print eller videresendelse</span></div>
         </div>
-        <div class="m-copy">Her er en kort oversigt, du kan give din leder, med det vigtigste for at kunne sige ja til modulet Fra specialist til leder.</div>
+        <div class="m-copy">Vedhæftet er et ét-siders ark, du kan give din leder — og en business case, hvis I skal have en formel godkendelse.</div>
         <div class="m-hr"></div>
-        <div class="m-title" style="font-size:0.85rem;">Fra specialist til leder — til beslutningen</div>
+        <div class="m-title" style="font-size:0.85rem;">Fra specialist til leder — start 3. november</div>
         <div class="m-factbox">
-          <div><b>Pris</b>11.800 kr.</div>
-          <div><b>Tidsforbrug</b>3-6 dage + forberedelse</div>
-          <div><b>Finansiering</b>Kan søges via SVU</div>
+          <div><b>Pris</b>11.800 kr. (ca. 6.900 kr. efter SVU)</div>
+          <div><b>Format</b>3 dage i Lyngby + 3 dage online</div>
+          <div><b>Binding</b>Ingen — kun dette modul</div>
         </div>
-        <div class="m-faq-q">Hvad får virksomheden ud af det?</div>
-        <div class="m-sub">En medarbejder, der går fra at løse opgaver til at sætte retning for et team — testet af på ét modul, før I forpligter jer til mere.</div>
-        <div class="m-btn outline">Download ét-siders ark (PDF)</div>
+        <div class="m-faq-q">Hvordan tager jeg det med til min leder?</div>
+        <div class="m-sub">Send arket direkte, eller print det til et møde. Vil de have det uddybet, er business casen vedhæftet samme mail.</div>
+        <div class="m-btn outline">📎 Fra_specialist_til_leder_ark.pdf</div>
+        <div class="m-btn outline">📎 Business_case_leder_modul.pdf</div>
       `},
-      { label: "Business case", url: "mail · fra: DTU Learn for Life", html: `
-        <div class="m-title">Business case: modulet Fra specialist til leder</div>
-        <div class="m-sub">Til dig, der skal have et internt ja fra leder eller HR</div>
-        <div class="m-hr"></div>
-        <div class="m-faq-q">Hvilket problem løser modulet?</div>
-        <div class="m-sub">Overgangen fra fagperson til leder er der, hvor de fleste nye ledere mangler konkrete redskaber — ikke teori, men metoder til at sætte retning for tidligere kolleger.</div>
-        <div class="m-faq-q">Hvad koster det, og hvad kræver det af tid?</div>
-        <div class="m-sub">11.800 kr. og 3-6 sammenhængende dage. Kan søges finansieret via SVU.</div>
-        <div class="m-faq-q">Er vi forpligtet til hele uddannelsen?</div>
-        <div class="m-sub">Nej. Modulet står alene, og I tager stilling til resten, når I har set effekten.</div>
-        <div class="m-btn outline">Download business case (PDF)</div>
+      { label: "Vedhæftning: ét ark", url: "PDF · Fra_specialist_til_leder_ark.pdf", html: `
+        <div class="doc-page">
+          <img class="doc-logo" src="./mockup-assets/dtu-logo.png" alt="DTU logo">
+          <div class="doc-kicker">DTU Learn for Life · Diplommodul</div>
+          <div class="doc-title">Fra specialist til leder</div>
+          <div class="doc-sub">Til dig, der skal give et hurtigt ja eller nej. Ét modul, ikke en tilmelding til hele diplomuddannelsen.</div>
+          <div class="doc-factgrid">
+            <div><b>Pris</b><span>11.800 kr.</span></div>
+            <div><b>Næste start</b><span>3. november 2026</span></div>
+            <div><b>Format</b><span>3 dage i Lyngby + 3 dage online</span></div>
+            <div><b>Finansiering</b><span>SVU, ca. 4.900 kr. i støtte</span></div>
+          </div>
+          <div class="doc-h">Hvorfor lige nu</div>
+          <div class="doc-p">Han er stærk fagligt, men skal snart lede tidligere kolleger. Modulet giver konkrete redskaber til det — ikke teori, han allerede kender.</div>
+          <div class="doc-h">Hvad han kan bagefter</div>
+          <div class="doc-p">Sætte retning for et team, holde en svær samtale med en tidligere sidemand, og uddelegere uden at miste overblikket. Afgangsopgaven er en plan for hans eget team.</div>
+          <div class="doc-h">Hvis I vil mere</div>
+          <div class="doc-p">Modulet er også modul 1 i den fulde diplomuddannelse i ledelse. I beslutter først om resten, når I har set, hvad han bringer med tilbage.</div>
+          <div class="doc-quote">"Vi sagde ja til ét modul for at se, om det gav noget. Tre måneder efter tilmeldte vi ham resten."<br>— Mette Aabo, afdelingschef, tidligere deltager</div>
+          <div class="doc-footer"><span>Kontakt: Peter Holm, studievejleder · 45 25 XX XX</span><span>lifelonglearning.dtu.dk</span></div>
+        </div>
+      `},
+      { label: "Vedhæftning: business case", url: "PDF · Business_case_leder_modul.pdf", html: `
+        <div class="doc-page">
+          <img class="doc-logo" src="./mockup-assets/dtu-logo.png" alt="DTU logo">
+          <div class="doc-kicker">DTU Learn for Life · Til godkendelse hos leder eller HR</div>
+          <div class="doc-title">Business case: Fra specialist til leder</div>
+          <div class="doc-sub">Brug dette ark, hvis kompetenceudvikling skal godkendes formelt, fx over en beløbsgrænse eller i et budgetmøde.</div>
+          <div class="doc-h">1. Problemet</div>
+          <div class="doc-p">Han overtager snart ledelsen af tidligere kolleger. Det kræver andre redskaber end de faglige — retning, delegering og svære samtaler — som han ikke har fået endnu.</div>
+          <div class="doc-h">2. Forslaget</div>
+          <div class="doc-p">Ét afgrænset diplommodul (5 ECTS) hos DTU, ikke en tilmelding til hele uddannelsen. I kan stoppe efter modulet uden binding.</div>
+          <div class="doc-h">3. Pris og tid</div>
+          <div class="doc-p">11.800 kr. minus op til ca. 4.900 kr. i SVU-støtte. 3 dage i Lyngby + 3 dage online, plus ca. 2 dages forberedelse hjemmefra. Næste hold starter 3. november 2026.</div>
+          <div class="doc-h">4. Hvad I får igen</div>
+          <div class="doc-p">En afgangsopgave, der er en konkret plan for hans eget team — ikke en generel eksamen. I kan bede om at se den.</div>
+          <div class="doc-factgrid">
+            <div><b>Nettopris</b><span>ca. 6.900 kr.</span></div>
+            <div><b>Tidsforbrug</b><span>6 dage + forberedelse</span></div>
+            <div><b>Binding</b><span>Ingen — modul for modul</span></div>
+            <div><b>Kontaktperson</b><span>Peter Holm, DTU</span></div>
+          </div>
+          <div class="doc-footer"><span>DTU Learn for Life · CVR 30060946</span><span>lifelonglearning.dtu.dk</span></div>
+        </div>
       `}
     ]
   },
@@ -825,6 +1001,16 @@ function selectJourney(i){
   document.querySelectorAll('.journey-tab').forEach((el,idx)=> el.classList.toggle('active', idx===i));
   document.querySelectorAll('.journey-panel').forEach((el,idx)=> el.classList.toggle('active', idx===i));
 }
+
+function tilpas(){
+  const slide = document.getElementById('slide');
+  const w = document.documentElement.clientWidth - 32;
+  const h = document.documentElement.clientHeight - 16;
+  if (w > 0 && h > 0) slide.style.setProperty('--s', Math.min(w / 1920, h / 1080));
+}
+addEventListener('resize', tilpas);
+addEventListener('load', tilpas);
+tilpas();
 </script>
 </body>
 </html>
